@@ -1,9 +1,9 @@
 // For showing either login or register on homepage:
 document.addEventListener("DOMContentLoaded", function () {
-  var create = document.getElementById("linkRegisterForm");
-  var haveAcc = document.getElementById("linkLogin");
-  var formLogin = document.getElementById("loginForm");
-  var formCreateAcc = document.getElementById("registerForm");
+  let create = document.getElementById("linkRegisterForm");
+  let haveAcc = document.getElementById("linkLogin");
+  let formLogin = document.getElementById("loginForm");
+  let formCreateAcc = document.getElementById("registerForm");
 
   create.addEventListener("click", function (e) {
     e.preventDefault();
@@ -29,3 +29,4 @@ function show(elem) {
   elem.classList.add("form--unhidden");
   elem.classList.remove("form--hidden");
 }
+
