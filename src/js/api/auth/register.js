@@ -1,4 +1,4 @@
-import { API_AUTH_REGISTER } from "../constants";
+import { API_AUTH_REGISTER } from "../constants.js";
 
 const method = "post";
 
@@ -17,6 +17,4 @@ export async function register(profile) {
   const result = await response.json();
   alert("You are now registered");
   console.log(result);
-
-window.location.href = "/auth/login/index.html";
 }

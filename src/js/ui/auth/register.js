@@ -2,8 +2,6 @@
 
 import { register } from "../../api/auth/register.js";
 
-// From https://www.youtube.com/watch?v=rLAGHFr8bvU&t=2306s
-
 export function setRegisterFormListener () {
     const form = document.querySelector("#registerForm");
 
