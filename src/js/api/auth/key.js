@@ -1,7 +1,6 @@
 
 // Auth key save in storage
 
-/*
 export function save(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -43,5 +42,3 @@ export function isLoggedIn() {
     const token = load("token"); 
     return !!token;
 }
-
-*/

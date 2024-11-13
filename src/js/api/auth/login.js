@@ -1,5 +1,4 @@
 
-/*
 import * as storage from "./key.js";
 import { API_AUTH_LOGIN } from "../constants.js";
 
@@ -28,12 +27,10 @@ export async function login(profile) {
     storage.save("profile", user);
 
     alert("You are now logged in");
-
-    window.location.href = "/index.html";
+    
 } catch (error) {
     alert("Wrong username or password");
 }
 
 }
 
-*/
