@@ -1,5 +1,4 @@
-
-import { API_AUTH_REGISTER, API_KEY } from "../constants.js";
+import { API_AUTH_REGISTER } from "../constants";
 
 const method = "post";
 
@@ -21,6 +20,3 @@ export async function register(profile) {
 
 window.location.href = "/auth/login/index.html";
 }
-
-
-

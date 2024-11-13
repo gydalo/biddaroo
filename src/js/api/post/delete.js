@@ -1,4 +1,4 @@
-export async function deletePost(id) {}
+/*export async function deletePost(id) {}
 
 import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
 import { authFetch } from "/src/js/api/auth/key.js";
@@ -25,6 +25,6 @@ export async function removePost(id) {
     window.location.href = "/index.html";
 
 
-}
+} */
 
 

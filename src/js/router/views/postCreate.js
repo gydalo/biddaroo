@@ -1,13 +1,10 @@
 // import { onCreatePost } from "../../ui/post/create";
-import { authGuard } from "../../utilities/authGuard.js"; 
+/*import { authGuard } from "../../utilities/authGuard.js"; 
 
 authGuard();
 
 
-/*
-const form = document.forms.createPost;
 
-form.addEventListener("submit", onCreatePost);  */
 
 import { createPost } from "../../api/post/create.js";
 
@@ -34,3 +31,4 @@ if (form) {
     console.error("Form not found");
 }
 
+*/

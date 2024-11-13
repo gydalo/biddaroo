@@ -1,4 +1,4 @@
-import { getPost } from "/src/js/api/post/index.js";
+/*import { getPost } from "/src/js/api/post/index.js";
 
 export function getPostIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -56,3 +56,4 @@ function renderPostData(postData) {
   postContainer.appendChild(postAuthor);
   postContainer.appendChild(postDate);
 }
+*/

@@ -1,10 +1,10 @@
-import { isLoggedIn } from "/src/js/api/auth/key.js";
+/*import { isLoggedIn } from "/src/js/api/auth/key.js";
 import { getPostIdFromUrl } from "/src/js/router/views/post.js";
 import * as postMethods from "/src/js/api/post/index.js";
 
 
 
-/* Create button only shows up when user is logged in */
+
 function renderCreateButton() {
     if (isLoggedIn()) {
         const container = document.querySelector("#createButton");
@@ -157,4 +157,6 @@ function registerButtonNotLoggedIn() {
 }
 }
 
-registerButtonNotLoggedIn();
+registerButtonNotLoggedIn(); */
+
+

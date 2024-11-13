@@ -1,6 +1,6 @@
 
 
-
+/*
 import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
 import { authFetch } from "/src/js/api/auth/key.js";
 
@@ -37,5 +37,5 @@ export async function getPost(id) {
     const result = await response.json();
     const post = result.data;
     return post;
-}
+}*/
 

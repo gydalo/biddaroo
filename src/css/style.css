@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form--unhidden {
+  display: block;
+}
+.form--hidden {
+  display: none;
+}
+label,
+input {
+  display: block;
+}

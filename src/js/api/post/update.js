@@ -1,6 +1,6 @@
 //export async function updatePost(id, { title, body, tags, media }) {}
 
-import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
+/*import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
 import { authFetch } from "/src/js/api/auth/key.js";
 
 
@@ -29,4 +29,4 @@ export async function updatePost(postData) {
 
     return await response.json();
 }
-
+*/

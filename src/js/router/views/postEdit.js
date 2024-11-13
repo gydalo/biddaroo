@@ -1,4 +1,4 @@
-import { authGuard } from "../../utilities/authGuard.js";
+/*import { authGuard } from "../../utilities/authGuard.js";
 import { getPost } from "../../api/post/read.js";
 import { updatePost } from "../../api/post/update.js";
 import { load } from "../../api/auth/key.js";
@@ -69,3 +69,4 @@ if (form) {
 } else {
     console.error("Edit post form not found");
 }
+*/
