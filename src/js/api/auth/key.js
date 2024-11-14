@@ -42,3 +42,4 @@ export function isLoggedIn() {
     const token = load("token"); 
     return !!token;
 }
+

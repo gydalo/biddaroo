@@ -14,7 +14,6 @@ function logOut() {
             localStorage.clear();
 
             alert("You are now logged out");
-            window.location.href = "/index.html";
         });
 
         container.appendChild(button);
