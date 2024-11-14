@@ -14,6 +14,7 @@ function logOut() {
             localStorage.clear();
 
             alert("You are now logged out");
+            location.reload()
         });
 
         container.appendChild(button);
