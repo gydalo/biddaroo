@@ -1,9 +1,31 @@
-/*import { isLoggedIn } from "/src/js/api/auth/key.js";
+import { isLoggedIn } from "../../api/auth/key.js";
+/*
 import { getPostIdFromUrl } from "/src/js/router/views/post.js";
-import * as postMethods from "/src/js/api/post/index.js";
+import * as postMethods from "/src/js/api/post/index.js"; */
+
+function logOut() {
+    if (isLoggedIn()) {
+        const container = document.querySelector("#logOutButton");
+
+    if (container) {
+        const button = document.createElement("button");
+        button.innerText = "Logout";
+        button.addEventListener("click", () => {
+            localStorage.clear();
+
+            alert("You are now logged out");
+            window.location.href = "/index.html";
+        });
+
+        container.appendChild(button);
+    }
+}
+}
 
 
+logOut();
 
+/*
 
 function renderCreateButton() {
     if (isLoggedIn()) {
@@ -93,30 +115,6 @@ function renderEditButton() {
 
 
 renderEditButton(); 
-
-
-function logOut() {
-    if (isLoggedIn()) {
-        const container = document.querySelector("#logOutButton");
-
-    if (container) {
-        const button = document.createElement("button");
-        button.innerText = "Logout";
-        button.addEventListener("click", () => {
-            localStorage.clear();
-
-            alert("You are now logged out");
-            window.location.href = "/index.html";
-        });
-
-        container.appendChild(button);
-    }
-}
-}
-
-
-logOut();
-
 
 
 function loginButtonNotLoggedIn() {
