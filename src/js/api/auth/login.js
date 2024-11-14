@@ -27,7 +27,8 @@ export async function login(profile) {
     storage.save("profile", user);
 
     alert("You are now logged in");
-    
+    location.reload()
+
 } catch (error) {
     alert("Wrong username or password");
 }
