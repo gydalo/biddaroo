@@ -5,10 +5,16 @@ import { isLoggedIn } from "../../api/auth/key.js";
 document.addEventListener("DOMContentLoaded", function () {
     const formLogin = document.getElementById("loginForm");
     const formCreateAcc = document.getElementById("registerForm");
+
+    const loggedInButton = document.getElementById("loggedInButton");
+    const loggedInHeading = document.getElementById("loggedInHeading");
   
     if (isLoggedIn()) {
         hide(formLogin);
         hide(formCreateAcc);
+        
+        show(loggedInButton);
+        show(loggedInHeading);
     } else {
     document.addEventListener("click", function (e) {
       if (e.target.id === "linkRegisterForm") {
