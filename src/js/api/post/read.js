@@ -1,13 +1,10 @@
-
-
-/*
-import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
-import { authFetch } from "/src/js/api/auth/key.js";
+import { API_AUCTION_LISTINGS } from "../constants.js";
+import { authFetch } from "../auth/key.js";
 
 
 
 export async function getPosts() {
-    const updatePostURL = `${API_SOCIAL_POSTS}`;
+    const updatePostURL = `${API_AUCTION_LISTINGS}`;
 
     try {
         const response = await authFetch(updatePostURL);
@@ -27,7 +24,7 @@ export async function getPost(id) {
         throw new Error("Get post requires a post ID");
     }
 
-    const getPostURL = `${API_SOCIAL_POSTS}/${id}`;
+    const getPostURL = `${API_AUCTION_LISTINGS}/${id}`;
     console.log("Fetching post from:", getPostURL);
 
     const response = await authFetch(getPostURL, {
@@ -37,5 +34,5 @@ export async function getPost(id) {
     const result = await response.json();
     const post = result.data;
     return post;
-}*/
+}
 
