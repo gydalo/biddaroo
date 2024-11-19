@@ -1,4 +1,5 @@
 import { isLoggedIn } from "../../api/auth/key.js";
+import { getPosts } from "../../api/post/read.js";
 
 
 // For showing either login or register on homepage:
@@ -44,3 +45,92 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   
+
+
+
+  // Load posts test
+  async function loadPosts() {
+    const postContainer = document.getElementById('post-container');
+    
+    const posts = await getPosts();
+
+    console.log("Fetched posts:", posts);
+
+    const postList = posts.data || posts;
+
+   
+    if (Array.isArray(postList) && postList.length > 0) {
+        const sortedPosts = postList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        const last12Posts = getLast12Posts(sortedPosts); 
+
+        console.log("Last 12 posts:", last12Posts); 
+
+       
+        renderPostTemplates(last12Posts, postContainer);
+    } else {
+        postContainer.innerHTML = '<p>No posts found.</p>'; 
+    }
+}
+
+function getLast12Posts(posts) {
+    return posts.slice(0, 12);
+}
+
+document.addEventListener("DOMContentLoaded", loadPosts);
+
+export function postTemplateA(postData) {
+    return `<div class="post" id=${postData.id}>${postData.title}</div>`;
+}
+
+export function postTemplate(postData) {
+    const post = document.createElement("div");
+    post.classList.add("post");
+
+    const postTitle = document.createElement('h2');
+    postTitle.textContent = postData.title;
+    post.append(postTitle);
+
+    if (postData.media) {
+        const img = document.createElement('img');
+        img.setAttribute("src", postData.media.url);
+        img.alt = `Image from ${postData.title}`;
+        post.append(img);
+        
+  } else {
+        const postImgPlaceholder = document.createElement('img');
+        postImgPlaceholder.setAttribute("src", "https://i.postimg.cc/JzqHnfnV/Skjermbilde-11.png");
+        postImgPlaceholder.alt = `Image not provided`;
+
+        post.append(postImgPlaceholder);
+
+    }
+
+
+    post.addEventListener("click", () => {
+        const targetUrl = `/post/index.html?id=${postData.id}`;
+        console.log(`Navigating to: ${targetUrl}`);
+        window.location.href = targetUrl;
+    });
+
+    const postAuthor = document.createElement('p');
+    postAuthor.textContent = `Author: ${postData.author}`;
+    post.append(postAuthor);
+
+    const postDate = document.createElement('p');
+    postDate.textContent = `Created on: ${new Date(postData.created).toLocaleDateString()} at ${new Date(postData.created).toLocaleTimeString()}`;
+    
+    post.append(postDate);
+
+    return post;
+}
+
+
+export function renderPostTemplate(postData, parent) {
+    parent.append(postTemplate(postData));
+}
+
+export function renderPostTemplates(postDataList, parent) {
+    parent.append(...postDataList.map(postTemplate));
+}
+
