@@ -91,21 +91,18 @@ export function postTemplate(postData) {
     postTitle.textContent = postData.title;
     post.append(postTitle);
 
-    if (postData.media) {
-        const img = document.createElement('img');
-        img.setAttribute("src", postData.media.url);
-        img.alt = `Image from ${postData.title}`;
-        post.append(img);
-        
-  } else {
-        const postImgPlaceholder = document.createElement('img');
-        postImgPlaceholder.setAttribute("src");
-        postImgPlaceholder.alt = `Image not provided`;
-
-        post.append(postImgPlaceholder);
-
+    if (postData.media && postData.media.length > 0) {
+      const postImage = document.createElement("img");
+  
+      postImage.setAttribute("src", postData.media[0].url);
+      postImage.alt = `Image from ${postData.title}`;
+  
+      post.appendChild(postImage);
+    } else {
+      console.log("No media available for this post.");
     }
 
+    /* REMEMBER TO ADD /BIDDAROO */
 
     post.addEventListener("click", () => {
         const targetUrl = `/biddaroo/post/index.html?id=${postData.id}`;
@@ -113,9 +110,9 @@ export function postTemplate(postData) {
         window.location.href = targetUrl;
     });
 
-    const postAuthor = document.createElement('p');
-    postAuthor.textContent = `Author: ${postData.author}`;
-    post.append(postAuthor);
+    const sellerName = document.createElement("p");
+    sellerName.textContent = `Seller: ${postData.seller?.name}`;
+    post.append(sellerName);
 
     const postDate = document.createElement('p');
     postDate.textContent = `Created on: ${new Date(postData.created).toLocaleDateString()} at ${new Date(postData.created).toLocaleTimeString()}`;

@@ -28,26 +28,30 @@ function renderPostData(postData) {
   const postTitle = document.createElement("h2");
   postTitle.textContent = postData.title;
 
-  const postBody = document.createElement("p");
-  postBody.textContent = postData.body;
+  const postDescription = document.createElement("p");
+  postDescription.textContent = postData.description;
 
-  const postAuthor = document.createElement("p");
-  postAuthor.textContent = `Author: ${postData.author}`;
+  const sellerName = document.createElement("p");
+  sellerName.textContent = `Seller: ${postData.seller?.name}`;
 
   const postDate = document.createElement("p");
   postDate.textContent = `Created on: ${new Date(
     postData.created
   ).toLocaleDateString()}`;
 
-  if (postData.media && postData.media.url) {
+  if (postData.media && postData.media.length > 0) {
     const postImage = document.createElement("img");
-    postImage.setAttribute("src", postData.media.url);
+
+    postImage.setAttribute("src", postData.media[0].url);
     postImage.alt = `Image from ${postData.title}`;
+
     postContainer.appendChild(postImage);
+  } else {
+    console.log("No media available for this post.");
   }
 
   postContainer.appendChild(postTitle);
-  postContainer.appendChild(postBody);
-  postContainer.appendChild(postAuthor);
+  postContainer.appendChild(postDescription);
+  postContainer.appendChild(sellerName);
   postContainer.appendChild(postDate);
 }
