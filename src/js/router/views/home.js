@@ -99,7 +99,7 @@ export function postTemplate(postData) {
         
   } else {
         const postImgPlaceholder = document.createElement('img');
-        postImgPlaceholder.setAttribute("src", "https://i.postimg.cc/JzqHnfnV/Skjermbilde-11.png");
+        postImgPlaceholder.setAttribute("src");
         postImgPlaceholder.alt = `Image not provided`;
 
         post.append(postImgPlaceholder);
@@ -108,7 +108,7 @@ export function postTemplate(postData) {
 
 
     post.addEventListener("click", () => {
-        const targetUrl = `/post/index.html?id=${postData.id}`;
+        const targetUrl = `/biddaroo/post/index.html?id=${postData.id}`;
         console.log(`Navigating to: ${targetUrl}`);
         window.location.href = targetUrl;
     });
