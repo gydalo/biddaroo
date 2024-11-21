@@ -25,23 +25,14 @@ function logOut() {
 
 logOut();
 
-/*
 
 function renderCreateButton() {
     if (isLoggedIn()) {
-        const container = document.querySelector("#createButton");
+        const container = document.querySelector("#loggedInButton");
 
         if (container) { 
             const button = document.createElement("button");
-            button.innerText = "Create new Post";
-            button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
-            )
+            button.innerText = "Create Listing";
             button.addEventListener("click", () => {
                 window.location.href = `/post/create/index.html`;
             });
@@ -51,8 +42,9 @@ function renderCreateButton() {
     }
 }
 
-renderCreateButton();
 
+renderCreateButton();
+/*
 
 function renderRemoveButton() {
     if (window.location.pathname === "/post/index.html" && isLoggedIn()) {

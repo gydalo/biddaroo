@@ -58,14 +58,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const postList = posts.data || posts;
 
-   
+   // Change this later
     if (Array.isArray(postList) && postList.length > 0) {
-        const sortedPosts = postList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const activePosts = postList.filter(post => {
+        const endsAtDate = new Date(post.endsAt);
+        const currentDate = new Date();
+        return endsAtDate > currentDate;
+      })
 
-        const last12Posts = getLast12Posts(sortedPosts); 
+      const sortedPosts = activePosts.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt))
 
-        console.log("Last 12 posts:", last12Posts); 
-
+      const last12Posts = getLast12Posts(sortedPosts);
        
         renderPostTemplates(last12Posts, postContainer);
     } else {
@@ -105,7 +108,7 @@ export function postTemplate(postData) {
     /* REMEMBER TO ADD /BIDDAROO */
 
     post.addEventListener("click", () => {
-        const targetUrl = `/biddaroo/post/index.html?id=${postData.id}`;
+        const targetUrl = /*add /biddaroo/ for the github version*/`/post/index.html?id=${postData.id}`;
         console.log(`Navigating to: ${targetUrl}`);
         window.location.href = targetUrl;
     });

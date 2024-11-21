@@ -25,33 +25,40 @@ function renderPostData(postData) {
     return;
   }
 
-  const postTitle = document.createElement("h2");
-  postTitle.textContent = postData.title;
+  const auctionTitle = document.createElement("h2");
+  auctionTitle.textContent = postData.title;
 
-  const postDescription = document.createElement("p");
-  postDescription.textContent = postData.description;
+  const auctionDescription = document.createElement("p");
+  auctionDescription.textContent = postData.description;
 
   const sellerName = document.createElement("p");
   sellerName.textContent = `Seller: ${postData.seller?.name}`;
 
-  const postDate = document.createElement("p");
-  postDate.textContent = `Created on: ${new Date(
+  const auctionEnds = document.createElement("p");
+
+  auctionEnds.textContent = `Auction ends ${new Date(
+    postData.endsAt
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
+
+  const auctionDate = document.createElement("p");
+  auctionDate.textContent = `Created on: ${new Date(
     postData.created
-  ).toLocaleDateString()}`;
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
 
   if (postData.media && postData.media.length > 0) {
-    const postImage = document.createElement("img");
+    const auctionImage = document.createElement("img");
 
-    postImage.setAttribute("src", postData.media[0].url);
-    postImage.alt = `Image from ${postData.title}`;
+    auctionImage.setAttribute("src", postData.media[0].url);
+    auctionImage.alt = `Image from ${postData.title}`;
 
-    postContainer.appendChild(postImage);
+    postContainer.appendChild(auctionImage);
   } else {
     console.log("No media available for this post.");
   }
 
-  postContainer.appendChild(postTitle);
-  postContainer.appendChild(postDescription);
+  postContainer.appendChild(auctionTitle);
+  postContainer.appendChild(auctionDescription);
   postContainer.appendChild(sellerName);
-  postContainer.appendChild(postDate);
+  postContainer.appendChild(auctionEnds);
+  postContainer.appendChild(auctionDate);
 }
