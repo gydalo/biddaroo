@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="module" src="/src/app.js"></script>
 </head>
 <body>
-    
-</body>
+    <header>
+      <a href="/profile/index.html">My Profile</a>
+      <div id="logOutButton"></div>
+    </header>
+    <main>
+    <h1>Biddaroo</h1>
+    <h2>New Listing</h2>
+    <div>
+    <form id="createListing" name="createListing">
+        <div>
+        <input type="text" name="title" placeholder="Title" required maxlength="100">
+    </div>
+        <div>
+        <input type="url" name="mediaURL" placeholder="Image URL">
+    </div>
+        <div>
+        <input type="text" name="mediaALT" placeholder="Image Alt Text">
+    </div>
+    <div>
+        <input type="datetime-local" name="endsAt" placeholder="Date for Auction end" required>
+    </div>
+        <div>
+        <textarea name="body" placeholder="Blog post text..." required> </textarea>
+    </div>
+      <button type="submit">Post</button>
+    </div>
+</form>
+</main>
+  <footer>
+    Copyright
+    </footer>
+  </body>
 </html>

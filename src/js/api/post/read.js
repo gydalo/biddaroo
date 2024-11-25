@@ -33,6 +33,7 @@ export async function getPost(id) {
 
     const result = await response.json();
     const post = result.data;
+    console.log("Seller data:", result.data?.seller);
     return post;
 }
 

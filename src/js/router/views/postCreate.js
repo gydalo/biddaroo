@@ -1,14 +1,7 @@
-// import { onCreatePost } from "../../ui/post/create";
-/*import { authGuard } from "../../utilities/authGuard.js"; 
-
-authGuard();
-
-
-
 
 import { createPost } from "../../api/post/create.js";
 
-const form = document.querySelector("#createPost");
+const form = document.querySelector("#createListing");
 
 if (form) {
     form.addEventListener("submit", (event) => {
@@ -18,17 +11,19 @@ if (form) {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData.entries());
 
+        const endsAt = new Date(formValues.endsAt).toISOString();
+
         createPost({
             title: formValues.title,
-            body: formValues.body,
-            media: {
+            description: formValues.description,
+            endsAt: endsAt,
+            media: [{
                 url: formValues.mediaURL,
                 alt: formValues.mediaALT
-            }
+            }]
         });
     });
 } else {
     console.error("Form not found");
 }
 
-*/
