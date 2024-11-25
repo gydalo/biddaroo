@@ -24,6 +24,13 @@ export default async function router(pathname = window.location.pathname) {
       await import("./views/register.js");
       await import("./views/postCreate.js");
       break;
+      case "/biddaroo/index.html":
+        await import("./views/home.js");
+        await import("./views/buttons.js");
+        await import("./views/login.js");
+        await import("./views/register.js");
+        await import("./views/postCreate.js");
+        break;
     /*case "/auth":
       await import("./views/auth.js");
       break;  */
