@@ -108,7 +108,7 @@ export function postTemplate(postData) {
     /* REMEMBER TO ADD /BIDDAROO */
 
     post.addEventListener("click", () => {
-        const targetUrl = /*add /biddaroo/ for the github version*/`/post/index.html?id=${postData.id}`;
+        const targetUrl = /*add /biddaroo/ for the github version*/`/biddaroo/post/index.html?id=${postData.id}`;
         console.log(`Navigating to: ${targetUrl}`);
         window.location.href = targetUrl;
     });

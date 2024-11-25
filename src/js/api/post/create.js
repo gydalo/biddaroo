@@ -14,7 +14,8 @@ export async function createPost(postData) {
     
     if (response.ok) {
         alert("Post created successfully!");
-       window.location.href = "/index.html";
+        // Change to /Biddaroo/ for github
+       window.location.href = "/biddaroo/index.html";
     } else {
         alert("Failed to create the listing");
     }
