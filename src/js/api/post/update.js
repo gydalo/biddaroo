@@ -1,10 +1,7 @@
 //export async function updatePost(id, { title, body, tags, media }) {}
 
-/*import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
-import { authFetch } from "/src/js/api/auth/key.js";
-
-
-
+import { API_AUCTION_LISTINGS } from "../constants.js";
+import { authFetch } from "../auth/key.js";
 
 const method = "put";
 
@@ -13,7 +10,7 @@ export async function updatePost(postData) {
         throw new Error("Update requires a post ID");
     }
 
-    const updatePostURL = `${API_SOCIAL_POSTS}/${postData.id}`;
+    const updatePostURL = `${API_AUCTION_LISTINGS}/${postData.id}`;
 
     const response = await authFetch(updatePostURL, {
         method,
@@ -29,4 +26,4 @@ export async function updatePost(postData) {
 
     return await response.json();
 }
-*/
+
