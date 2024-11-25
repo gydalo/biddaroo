@@ -34,7 +34,8 @@ function renderCreateButton() {
             const button = document.createElement("button");
             button.innerText = "Create Listing";
             button.addEventListener("click", () => {
-                window.location.href = `/post/create/index.html`;
+                // Change to /Biddaroo/ for github version
+                window.location.href = `/biddaroo/post/create/index.html`;
             });
             
             container.appendChild(button);
