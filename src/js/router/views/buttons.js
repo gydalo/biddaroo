@@ -1,7 +1,7 @@
 import { isLoggedIn, load } from "../../api/auth/key.js";
 import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "/src/js/router/views/post.js";
-/*import * as postMethods from "/src/js/api/post/index.js"; */
+import * as postMethods from "../../api/post/index.js";
 
 function logOut() {
     if (isLoggedIn()) {
@@ -62,41 +62,43 @@ function renderCreateButton() {
 }
 
 renderCreateButton();
-/*
 
-function renderRemoveButton() {
-    if (window.location.pathname === "/post/index.html" && isLoggedIn()) {
+
+
+async function renderRemoveButton() {
+    if (window.location.pathname === "/post/index.html" || "/biddaroo/post/index.html" && isLoggedIn()) {
         const container = document.querySelector("#deleteButton");
         const id = getPostIdFromUrl(); 
 
         if (container, id) { 
+            try {
+                const post = await getPost(id);
+                const userProfile = load("profile");
+                const loggedInUser = userProfile ? userProfile.name : null;
+
+            if (post.seller && post.seller.name === loggedInUser) {
             const button = document.createElement("button");
             button.innerText = "Delete Post";
-            )
+
             button.addEventListener("click", () => {
                 postMethods.removePost(id);
             });
 
             container.appendChild(button);
 
-        } else {
-            if (!container) {
-                console.error("No container found with the selector #deleteButton");
-            }
-            if (!id) {
-                console.error("No post ID found in URL");
-            }
         }
+    } catch (error) {
+        console.error("Failed to render edit button:", error);
     }
 }
- 
+}
+}
 
 renderRemoveButton(); 
 
-   */
 
 async function renderEditButton() {
-    if (window.location.pathname === `/post/index.html` && isLoggedIn()) {
+    if (window.location.pathname === "/post/index.html" || "/biddaroo/post/index.html" && isLoggedIn()) {
         const container = document.querySelector("#editButton");
         const id = getPostIdFromUrl();
 
@@ -112,7 +114,7 @@ async function renderEditButton() {
                     const button = document.createElement("button");
                     button.innerText = "Edit Post";
                     button.addEventListener("click", () => {
-                        window.location.href = `/post/edit/index.html?id=${id}`;
+                        window.location.href = `/biddaroo/post/edit/index.html?id=${id}`;
                     });
                     container.appendChild(button);
                 }
