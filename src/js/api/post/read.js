@@ -22,7 +22,7 @@ export async function getPost(id) {
         throw new Error("Get post requires a post ID");
     }
 
-    const getPostURL = `${API_AUCTION_LISTINGS}/${id}`;
+    const getPostURL = `${API_AUCTION_LISTINGS}/${id}?_seller=true`;
     console.log("Fetching post from:", getPostURL);
 
     const response = await authFetch(getPostURL, {
