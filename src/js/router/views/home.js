@@ -7,14 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const formLogin = document.getElementById("loginForm");
     const formCreateAcc = document.getElementById("registerForm");
 
-    const loggedInButton = document.getElementById("loggedInButton");
+    const loggedInProfileButton = document.getElementById("loggedInProfileButton");
+    const loggedInCreateButton = document.getElementById("loggedInCreateButton");
     const loggedInHeading = document.getElementById("loggedInHeading");
   
     if (isLoggedIn()) {
         hide(formLogin);
         hide(formCreateAcc);
         
-        show(loggedInButton);
+        show(loggedInProfileButton);
+        show(loggedInCreateButton);
         show(loggedInHeading);
     } else {
     document.addEventListener("click", function (e) {
@@ -47,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
 
-
+/*
   // Load posts test
   async function loadPosts() {
     const postContainer = document.getElementById('post-container');
@@ -81,6 +83,43 @@ function getLast12Posts(posts) {
 }
 
 document.addEventListener("DOMContentLoaded", loadPosts);
+*/
+
+
+// Fix later
+async function loadPosts() {
+  const postContainer = document.getElementById('post-container');
+  
+  const posts = await getPosts();
+
+  console.log("Fetched posts:", posts);
+
+  const postList = posts.data || posts;
+
+
+  if (Array.isArray(postList) && postList.length > 0) {
+    const sortedPosts = postList.sort((b, a) => new Date(a.created) - new Date(b.created));
+
+    const last12Posts = getLast12Posts(sortedPosts); 
+
+    console.log("Last 12 posts:", last12Posts); 
+
+   
+    renderPostTemplates(last12Posts, postContainer);
+} else {
+    postContainer.innerHTML = '<p>No posts found.</p>'; 
+}
+}
+
+function getLast12Posts(posts) {
+return posts.slice(0, 12);
+}
+
+document.addEventListener("DOMContentLoaded", loadPosts);
+//
+
+
+
 
 export function postTemplateA(postData) {
     return `<div class="post" id=${postData.id}>${postData.title}</div>`;

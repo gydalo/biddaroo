@@ -22,13 +22,31 @@ function logOut() {
 }
 }
 
-
 logOut();
+
+function renderProfileButton() {
+    if (isLoggedIn()) {
+        const container = document.querySelector("#loggedInProfileButton");
+
+        if (container) { 
+            const button = document.createElement("button");
+            button.innerText = "Profile";
+            button.addEventListener("click", () => {
+                // Change to /Biddaroo/ for github version
+                window.location.href = `/biddaroo/profile/index.html`;
+            });
+            
+            container.appendChild(button);
+        }
+    }
+}
+
+renderProfileButton();
 
 
 function renderCreateButton() {
     if (isLoggedIn()) {
-        const container = document.querySelector("#loggedInButton");
+        const container = document.querySelector("#loggedInCreateButton");
 
         if (container) { 
             const button = document.createElement("button");
@@ -42,7 +60,6 @@ function renderCreateButton() {
         }
     }
 }
-
 
 renderCreateButton();
 /*
