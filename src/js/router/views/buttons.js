@@ -107,10 +107,6 @@ async function renderEditButton() {
                 const userProfile = load("profile");
                 const loggedInUser = userProfile ? userProfile.name : null;
 
-                console.log("Logged-in user:", loggedInUser);
-                console.log("Post seller user:", post.seller.name);
-                console.log("User profile:", userProfile);
-
                 if (post.seller && post.seller.name === loggedInUser) {
 
                     const button = document.createElement("button");
