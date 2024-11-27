@@ -1,7 +1,7 @@
-import { isLoggedIn } from "../../api/auth/key.js";
-/*
+import { isLoggedIn, load } from "../../api/auth/key.js";
+import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "/src/js/router/views/post.js";
-import * as postMethods from "/src/js/api/post/index.js"; */
+/*import * as postMethods from "/src/js/api/post/index.js"; */
 
 function logOut() {
     if (isLoggedIn()) {
@@ -72,13 +72,6 @@ function renderRemoveButton() {
         if (container, id) { 
             const button = document.createElement("button");
             button.innerText = "Delete Post";
-            button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
             )
             button.addEventListener("click", () => {
                 postMethods.removePost(id);
@@ -96,36 +89,47 @@ function renderRemoveButton() {
         }
     }
 }
+ 
 
 renderRemoveButton(); 
 
-function renderEditButton() {
-    if (window.location.pathname === "/post/index.html" && isLoggedIn()) {
-        const container = document.querySelector("#editButton");
-        const id = getPostIdFromUrl(); 
+   */
 
-        if (container, id) { 
-            const button = document.createElement("button");
-            button.innerText = "Edit Post";
-            button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
-            )
-            button.addEventListener("click", () => {
-                window.location.href = `/post/edit/index.html?id=${id}`;
-            });
-            container.appendChild(button);
+async function renderEditButton() {
+    if (window.location.pathname === `/post/index.html` && isLoggedIn()) {
+        const container = document.querySelector("#editButton");
+        const id = getPostIdFromUrl();
+
+        if (container && id) {
+            try {
+                const post = await getPost(id);
+
+                const userProfile = load("profile");
+                const loggedInUser = userProfile ? userProfile.name : null;
+
+                console.log("Logged-in user:", loggedInUser);
+                console.log("Post seller user:", post.seller.name);
+                console.log("User profile:", userProfile);
+
+                if (post.seller && post.seller.name === loggedInUser) {
+
+                    const button = document.createElement("button");
+                    button.innerText = "Edit Post";
+                    button.addEventListener("click", () => {
+                        window.location.href = `/post/edit/index.html?id=${id}`;
+                    });
+                    container.appendChild(button);
+                }
+            } catch (error) {
+                console.error("Failed to render edit button:", error);
+            }
         }
     }
 }
 
+renderEditButton();
 
-renderEditButton(); 
-
+/*
 
 function loginButtonNotLoggedIn() {
     if (isLoggedIn()) {
