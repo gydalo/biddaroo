@@ -119,8 +119,6 @@ document.addEventListener("DOMContentLoaded", loadPosts);
 //
 
 
-
-
 export function postTemplateA(postData) {
     return `<div class="post" id=${postData.id}>${postData.title}</div>`;
 }

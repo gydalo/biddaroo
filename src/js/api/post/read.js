@@ -1,10 +1,8 @@
 import { API_AUCTION_LISTINGS } from "../constants.js";
 import { authFetch } from "../auth/key.js";
 
-
-
 export async function getPosts() {
-    const updatePostURL = `${API_AUCTION_LISTINGS}`;
+    const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true`;
 
     try {
         const response = await authFetch(updatePostURL);
@@ -33,7 +31,8 @@ export async function getPost(id) {
 
     const result = await response.json();
     const post = result.data;
-    console.log("Seller data:", result.data?.seller);
+    console.log("Seller data:", result.data.seller);
     return post;
+
 }
 
