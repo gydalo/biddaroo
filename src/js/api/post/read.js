@@ -2,7 +2,7 @@ import { API_AUCTION_LISTINGS } from "../constants.js";
 import { authFetch } from "../auth/key.js";
 
 export async function getPosts() {
-    const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true`;
+    const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true&_bids=true`;
 
     try {
         const response = await authFetch(updatePostURL);
@@ -22,7 +22,7 @@ export async function getPost(id) {
         throw new Error("Get post requires a post ID");
     }
 
-    const getPostURL = `${API_AUCTION_LISTINGS}/${id}?_seller=true`;
+    const getPostURL = `${API_AUCTION_LISTINGS}/${id}?_seller=true&_bids=true`;
     console.log("Fetching post from:", getPostURL);
 
     const response = await authFetch(getPostURL, {

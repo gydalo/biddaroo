@@ -10,7 +10,8 @@ const postId = getPostIdFromUrl();
 if (postId) {
   getPost(postId)
     .then((postData) => {
-      renderPostData(postData);
+      renderPostData(postData),
+      renderBidderInformation(postData);
     })
     .catch((error) => {
       console.error("Error fetching post:", error);
@@ -45,6 +46,10 @@ function renderPostData(postData) {
     postData.created
   ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
 
+  const bidsCount = document.createElement("p");
+  bidsCount.textContent = `Total Bids: ${postData._count?.bids ?? 0}`;
+
+
   if (postData.media && postData.media.length > 0) {
     const auctionImage = document.createElement("img");
 
@@ -56,9 +61,42 @@ function renderPostData(postData) {
     console.log("No media available for this post.");
   }
 
+
   postContainer.appendChild(auctionTitle);
   postContainer.appendChild(auctionDescription);
   postContainer.appendChild(sellerName);
+  postContainer.appendChild(bidsCount);
   postContainer.appendChild(auctionEnds);
   postContainer.appendChild(auctionDate);
+}
+
+
+function renderBidderInformation(postData) {
+  const bidderContainer = document.getElementById("bidder-container");
+
+  if (!bidderContainer) {
+    console.error("Post container not found");
+    return;
+  }
+
+  const bidsContainer = document.createElement("div");
+  bidsContainer.classList.add("bids-container");
+
+  const bidsTitle = document.createElement("h3");
+  bidsTitle.textContent = "Bids:";
+  bidsContainer.appendChild(bidsTitle);
+
+  if (postData.bids && postData.bids.length > 0) {
+    postData.bids.forEach((bid) => {
+      const bidElement = document.createElement("p");
+      bidElement.textContent = `Bidder: ${bid.bidder.name}, Amount: ${bid.amount}`;
+      bidsContainer.appendChild(bidElement);
+    });
+  } else {
+    const noBidsMessage = document.createElement("p");
+    noBidsMessage.textContent = "No bids placed yet.";
+    bidsContainer.appendChild(noBidsMessage);
+  }
+
+  bidderContainer.appendChild(bidsContainer);
 }
