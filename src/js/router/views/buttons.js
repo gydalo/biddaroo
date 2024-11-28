@@ -1,6 +1,6 @@
 import { isLoggedIn, load } from "../../api/auth/key.js";
 import { getPost } from "../../api/post/read.js";
-import { getPostIdFromUrl } from "/src/js/router/views/post.js";
+import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
 
 function logOut() {
