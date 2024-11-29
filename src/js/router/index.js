@@ -65,9 +65,11 @@ export default async function router(pathname = window.location.pathname) {
       break;
     case "/profile/index.html":
       await import("./views/profile.js");
+      await import("./views/buttons.js");
       break;
     case "/biddaroo/profile/index.html":
       await import("./views/profile.js");
+      await import("./views/buttons.js");
       break;
     case "/profile/":
       await import("./views/profile.js");
@@ -75,5 +77,11 @@ export default async function router(pathname = window.location.pathname) {
     case "/biddaroo/profile/":
       await import("./views/profile.js");
       break;
+      case "/biddaroo/profile/edit/index.html":
+        await import("../api/profile/profileEdit.js");
+        break;
+        case "/profile/edit/index.html":
+          await import("../api/profile/profileEdit.js");
+          break;
   }
 }
