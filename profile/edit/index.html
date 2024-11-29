@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="../../src/app.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+    <div id="loggedInProfileButton" class="form--hidden"></div>
+      <div id="logOutButton"></div>
+    </header>
+    <main>
+    <h1>Biddaroo</h1>
+    <h2>Edit Profile</h2>
+    <div>
+    <form id="editProfile" name="editProfile">
+        <div>
+        <input type="text" name="username" placeholder="Username" id="username" required maxlength="15">
+    </div>
+        <div>
+        <input type="url" name="avatarURL" id="avatarURL" placeholder="Profile image URL">
+    </div>
+    <div>
+        <input type="url" name="bannerURL" id="bannerURL" placeholder="Header URL">
+    </div>
+        <div>
+        <textarea name="bio" id="bio" placeholder="Bio text..."> </textarea>
+    </div>
+      <button type="submit">Edit</button>
+    </div>
+</form>
+</main>
+  <footer>
+    Copyright
+    </footer>
+  </body>
+</html>

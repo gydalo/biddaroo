@@ -2,6 +2,7 @@ import { isLoggedIn, load } from "../../api/auth/key.js";
 import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
+import { getProfile } from "../../api/profile/read.js";
 
 function logOut() {
     if (isLoggedIn()) {
@@ -42,6 +43,36 @@ function renderProfileButton() {
 }
 
 renderProfileButton();
+
+
+async function renderEditProfileButton() {
+    if (window.location.pathname === "/profile/index.html" || "/biddaroo/profile/index.html" && isLoggedIn()) {
+      
+        const container = document.querySelector("#editProfileButton");
+
+        if (container) {
+            try {
+                const profileData = load("profile");
+                const loggedInUser = profileData?.data?.name || null;
+
+                if (loggedInUser) {
+                    const button = document.createElement("button");
+                    button.innerText = "Edit Profile";
+                    button.addEventListener("click", () => {
+                        window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`;
+                    });
+                    container.appendChild(button);
+                }
+            } catch (error) {
+                console.error("Failed to render edit button:", error);
+            }
+            } else {
+                console.error("Profile name or container not found.")
+            }
+        }
+    }
+
+renderEditProfileButton();
 
 
 function renderCreateButton() {

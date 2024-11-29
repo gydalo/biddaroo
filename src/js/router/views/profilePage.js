@@ -1,22 +1,25 @@
-import { isLoggedIn } from '../../api/auth/key.js';
-import { getProfile } from '../../api/profile/read.js';
-import { load } from '../../api/auth/key.js';
+import { isLoggedIn, load, save } from '../../api/auth/key.js';
 
 export const profilePage = async () => {
     if (!isLoggedIn()) {
-      location.href = './'; 
+      location.href = './';
     } else {
       try {
         const profileData = load('profile');
   
-        renderProfilePage(profileData);
+        if (!profileData || !profileData.data) {
+          console.error("Profile data is missing or not structured as expected.");
+          return;
+        }
+  
+        renderProfilePage(profileData.data); 
       } catch (error) {
         console.error('Error loading profile:', error);
       }
     }
   };
   
-  function renderProfilePage(profileData) {
+  function renderProfilePage(data) {
     const profileContainer = document.getElementById("profile-container");
   
     if (!profileContainer) {
@@ -24,32 +27,29 @@ export const profilePage = async () => {
       return;
     }
   
-    const nameElement = document.createElement("h1");
-    nameElement.textContent = profileData.name;
+    profileContainer.innerHTML = "";
+  
+    const nameElement = document.createElement("h3");
+    nameElement.textContent = data.name || "No name provided";
     profileContainer.appendChild(nameElement);
   
-    const emailElement = document.createElement("p");
-    emailElement.textContent = `Email: ${profileData.email}`;
-    profileContainer.appendChild(emailElement);
-  
     const bioElement = document.createElement("p");
-    bioElement.textContent = `Bio: ${profileData.bio}`;
+    bioElement.textContent = data.bio || "No bio available";
     profileContainer.appendChild(bioElement);
   
-    if (profileData.avatar && profileData.avatar.url) {
+    if (data.avatar && data.avatar.url) {
       const avatarImage = document.createElement("img");
-      avatarImage.src = profileData.avatar.url;
-      avatarImage.alt = profileData.avatar.alt || "Profile Avatar";
+      avatarImage.src = data.avatar.url;
+      avatarImage.alt = data.avatar.alt || "Profile Avatar";
       profileContainer.appendChild(avatarImage);
     }
   
-    if (profileData.banner && profileData.banner.url) {
+    if (data.banner && data.banner.url) {
       const bannerImage = document.createElement("img");
-      bannerImage.src = profileData.banner.url;
-      bannerImage.alt = profileData.banner.alt || "Profile Banner";
+      bannerImage.src = data.banner.url;
+      bannerImage.alt = data.banner.alt || "Profile Banner";
       profileContainer.appendChild(bannerImage);
     }
   
-
-    console.log(profileData);
   }
+
