@@ -2,7 +2,6 @@ import { isLoggedIn, load } from "../../api/auth/key.js";
 import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
-import { getProfile } from "../../api/profile/read.js";
 
 function logOut() {
     if (isLoggedIn()) {
@@ -53,7 +52,7 @@ async function renderEditProfileButton() {
         if (container) {
             try {
                 const profileData = load("profile");
-                const loggedInUser = profileData?.data?.name || null;
+                const loggedInUser = profileData?.data.name || null;
 
                 if (loggedInUser) {
                     const button = document.createElement("button");
@@ -66,8 +65,6 @@ async function renderEditProfileButton() {
             } catch (error) {
                 console.error("Failed to render edit button:", error);
             }
-            } else {
-                console.error("Profile name or container not found.")
             }
         }
     }

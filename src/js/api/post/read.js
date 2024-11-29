@@ -23,7 +23,6 @@ export async function getPost(id) {
     }
 
     const getPostURL = `${API_AUCTION_LISTINGS}/${id}?_seller=true&_bids=true`;
-    console.log("Fetching post from:", getPostURL);
 
     const response = await authFetch(getPostURL, {
         
@@ -31,7 +30,6 @@ export async function getPost(id) {
 
     const result = await response.json();
     const post = result.data;
-    console.log("Seller data:", result.data.seller);
     return post;
 
 }

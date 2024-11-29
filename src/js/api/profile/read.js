@@ -1,6 +1,5 @@
 import { authFetch } from "../../api/auth/key.js";
 import { API_AUCTION_PROFILES } from "../../api/constants.js";
-import { load } from "../../api/auth/key.js";
 
 
 export async function getProfiles() {
