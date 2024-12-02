@@ -11,7 +11,7 @@ export const profilePage = async () => {
       console.log("Loaded profile data:", profileData);
 
 
-      if (!profileData || !profileData.data) {
+      if (!profileData || Object.keys(profileData).length === 0) {
         console.error("Profile data is missing");
         return;
       }
