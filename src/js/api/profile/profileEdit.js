@@ -66,7 +66,7 @@ if (form) {
       if (response) {
         console.log("Profile updated successfully:", response);
         save("profile", response);
-        window.location.href = "/biddaroo/profile.html";
+        window.location.href = "/biddaroo/profile/index.html";
       }
     } catch (error) {
       console.error("Error updating profile:", error);
