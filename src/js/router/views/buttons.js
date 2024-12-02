@@ -4,153 +4,155 @@ import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
 
 function logOut() {
-    if (isLoggedIn()) {
-        const container = document.querySelector("#logOutButton");
+  if (isLoggedIn()) {
+    const container = document.querySelector("#logOutButton");
 
     if (container) {
-        const button = document.createElement("button");
-        button.innerText = "Logout";
-        button.addEventListener("click", () => {
-            localStorage.clear();
+      const button = document.createElement("button");
+      button.innerText = "Logout";
+      button.addEventListener("click", () => {
+        localStorage.clear();
 
-            alert("You are now logged out");
-            location.reload()
-        });
+        alert("You are now logged out");
+        location.reload();
+      });
 
-        container.appendChild(button);
+      container.appendChild(button);
     }
-}
+  }
 }
 
 logOut();
 
 function renderProfileButton() {
-    if (isLoggedIn()) {
-        const container = document.querySelector("#loggedInProfileButton");
+  if (isLoggedIn()) {
+    const container = document.querySelector("#loggedInProfileButton");
 
-        if (container) { 
-            const button = document.createElement("button");
-            button.innerText = "Profile";
-            button.addEventListener("click", () => {
-                // Change to /Biddaroo/ for github version
-                window.location.href = `/biddaroo/profile/index.html`;
-            });
-            
-            container.appendChild(button);
-        }
+    if (container) {
+      const button = document.createElement("button");
+      button.innerText = "Profile";
+      button.addEventListener("click", () => {
+        // Change to /Biddaroo/ for github version
+        window.location.href = `/biddaroo/profile/index.html`;
+      });
+
+      container.appendChild(button);
     }
+  }
 }
 
 renderProfileButton();
 
-
 async function renderEditProfileButton() {
-    if (window.location.pathname === "/profile/index.html" || "/biddaroo/profile/index.html" && isLoggedIn()) {
-      
-        const container = document.querySelector("#editProfileButton");
+  if (
+    window.location.pathname === "/profile/index.html" ||
+    ("/biddaroo/profile/index.html" && isLoggedIn())
+  ) {
+    const container = document.querySelector("#editProfileButton");
 
-        if (container) {
-            try {
-                const profileData = load("profile");
-                const loggedInUser = profileData?.data.name || null;
+    if (container) {
+      try {
+        const profileData = load("profile");
+        const loggedInUser =
+          profileData?.data?.name || profileData?.name || null;
 
-                if (loggedInUser) {
-                    const button = document.createElement("button");
-                    button.innerText = "Edit Profile";
-                    button.addEventListener("click", () => {
-                        window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`;
-                    });
-                    container.appendChild(button);
-                }
-            } catch (error) {
-                console.error("Failed to render edit button:", error);
-            }
-            }
+        if (loggedInUser) {
+          const button = document.createElement("button");
+          button.innerText = "Edit Profile";
+          button.addEventListener("click", () => {
+            window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`;
+          });
+          container.appendChild(button);
         }
+      } catch (error) {
+        console.error("Failed to render edit button:", error);
+      }
     }
+  }
+}
 
 renderEditProfileButton();
 
-
 function renderCreateButton() {
-    if (isLoggedIn()) {
-        const container = document.querySelector("#loggedInCreateButton");
+  if (isLoggedIn()) {
+    const container = document.querySelector("#loggedInCreateButton");
 
-        if (container) { 
-            const button = document.createElement("button");
-            button.innerText = "Create Listing";
-            button.addEventListener("click", () => {
-                // Change to /Biddaroo/ for github version
-                window.location.href = `/biddaroo/post/create/index.html`;
-            });
-            
-            container.appendChild(button);
-        }
+    if (container) {
+      const button = document.createElement("button");
+      button.innerText = "Create Listing";
+      button.addEventListener("click", () => {
+        // Change to /Biddaroo/ for github version
+        window.location.href = `/biddaroo/post/create/index.html`;
+      });
+
+      container.appendChild(button);
     }
+  }
 }
 
 renderCreateButton();
 
-
-
 async function renderRemoveButton() {
-    if (window.location.pathname === "/post/index.html" || "/biddaroo/post/index.html" && isLoggedIn()) {
-        const container = document.querySelector("#deleteButton");
-        const id = getPostIdFromUrl(); 
+  if (
+    window.location.pathname === "/post/index.html" ||
+    ("/biddaroo/post/index.html" && isLoggedIn())
+  ) {
+    const container = document.querySelector("#deleteButton");
+    const id = getPostIdFromUrl();
 
-        if (container, id) { 
-            try {
-                const post = await getPost(id);
-                const userProfile = load("profile");
-                const loggedInUser = userProfile ? userProfile.name : null;
+    if ((container, id)) {
+      try {
+        const post = await getPost(id);
+        const userProfile = load("profile");
+        const loggedInUser = userProfile ? userProfile.name : null;
 
-            if (post.seller && post.seller.name === loggedInUser) {
-            const button = document.createElement("button");
-            button.innerText = "Delete Post";
+        if (post.seller && post.seller.name === loggedInUser) {
+          const button = document.createElement("button");
+          button.innerText = "Delete Post";
 
-            button.addEventListener("click", () => {
-                postMethods.removePost(id);
-            });
+          button.addEventListener("click", () => {
+            postMethods.removePost(id);
+          });
 
-            container.appendChild(button);
-
+          container.appendChild(button);
         }
-    } catch (error) {
+      } catch (error) {
         console.error("Failed to render edit button:", error);
+      }
     }
-}
-}
+  }
 }
 
-renderRemoveButton(); 
-
+renderRemoveButton();
 
 async function renderEditButton() {
-    if (window.location.pathname === "/post/index.html" || "/biddaroo/post/index.html" && isLoggedIn()) {
-        const container = document.querySelector("#editButton");
-        const id = getPostIdFromUrl();
+  if (
+    window.location.pathname === "/post/index.html" ||
+    ("/biddaroo/post/index.html" && isLoggedIn())
+  ) {
+    const container = document.querySelector("#editButton");
+    const id = getPostIdFromUrl();
 
-        if (container && id) {
-            try {
-                const post = await getPost(id);
+    if (container && id) {
+      try {
+        const post = await getPost(id);
 
-                const userProfile = load("profile");
-                const loggedInUser = userProfile ? userProfile.name : null;
+        const userProfile = load("profile");
+        const loggedInUser = userProfile ? userProfile.name : null;
 
-                if (post.seller && post.seller.name === loggedInUser) {
-
-                    const button = document.createElement("button");
-                    button.innerText = "Edit Post";
-                    button.addEventListener("click", () => {
-                        window.location.href = `/biddaroo/post/edit/index.html?id=${id}`;
-                    });
-                    container.appendChild(button);
-                }
-            } catch (error) {
-                console.error("Failed to render edit button:", error);
-            }
+        if (post.seller && post.seller.name === loggedInUser) {
+          const button = document.createElement("button");
+          button.innerText = "Edit Post";
+          button.addEventListener("click", () => {
+            window.location.href = `/biddaroo/post/edit/index.html?id=${id}`;
+          });
+          container.appendChild(button);
         }
+      } catch (error) {
+        console.error("Failed to render edit button:", error);
+      }
     }
+  }
 }
 
 renderEditButton();
@@ -196,5 +198,3 @@ function registerButtonNotLoggedIn() {
 }
 
 registerButtonNotLoggedIn(); */
-
-
