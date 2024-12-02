@@ -10,15 +10,15 @@ export const profilePage = async () => {
       const profileData = load('profile'); 
       console.log("Loaded profile data:", profileData);
 
+      const data = profileData.data ? profileData.data : profileData;
 
-      if (!profileData || Object.keys(profileData).length === 0) {
+      if (!data || Object.keys(data).length === 0) {
         console.error("Profile data is missing");
         return;
       }
 
-      const { data } = profileData;
+      renderProfilePage(data);  
 
-      renderProfilePage(data);
     } catch (error) {
       console.error('Error loading profile:', error);
     }
