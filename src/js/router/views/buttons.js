@@ -103,16 +103,11 @@ async function renderRemoveButton() {
     const container = document.querySelector("#deleteButton");
     const id = getPostIdFromUrl();
 
-    console.log("Post ID from URL:", id);
-
     if ((container, id)) {
       try {
         const post = await getPost(id);
 
-        console.log("Fetched post:", post);
-
         const loggedInUser = getLoggedInUserName();
-        console.log("Logged-in user:", loggedInUser);
 
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
@@ -147,10 +142,6 @@ async function renderEditButton() {
         const post = await getPost(id);
 
         const loggedInUser = getLoggedInUserName();
-        console.log("Logged-in user:", loggedInUser);
-
-        console.log("Post seller name:", post.seller?.name);
-        console.log("Logged-in user name:", loggedInUser);
 
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
