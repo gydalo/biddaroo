@@ -1,5 +1,7 @@
 import { isLoggedIn, load } from '../../api/auth/key.js';
 
+console.log("Loading profile from Local Storage:", load('profile')); 
+
 export const profilePage = async () => {
   if (!isLoggedIn()) {
     location.href = './';
