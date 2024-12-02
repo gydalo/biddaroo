@@ -154,10 +154,20 @@ export function postTemplate(postData) {
     sellerName.textContent = `Seller: ${postData.seller?.name}`;
     post.append(sellerName);
 
-    const postDate = document.createElement('p');
-    postDate.textContent = `Created on: ${new Date(postData.created).toLocaleDateString()} at ${new Date(postData.created).toLocaleTimeString()}`;
-    
-    post.append(postDate);
+    const auctionDate = document.createElement('p');
+    auctionDate.textContent = `Created on: ${new Date(
+    postData.created
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
+
+  const auctionEnds = document.createElement('p');
+  auctionEnds.textContent = `Auction ends ${new Date(
+    postData.endsAt
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
+
+
+
+
+    post.append(auctionDate, auctionEnds);
 
     return post;
 }

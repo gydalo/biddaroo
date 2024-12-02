@@ -56,4 +56,6 @@ function renderProfilePage(data) {
     bannerImage.alt = data.banner.alt || "Profile Banner";
     profileContainer.appendChild(bannerImage);
   }
+
 }
+
