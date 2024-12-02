@@ -3,6 +3,11 @@ import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
 
+function getLoggedInUserName() {
+    const profileData = load("profile");
+    return profileData?.data?.name || profileData?.name || null;
+  }
+
 function logOut() {
   if (isLoggedIn()) {
     const container = document.querySelector("#logOutButton");
@@ -52,9 +57,7 @@ async function renderEditProfileButton() {
 
     if (container) {
       try {
-        const profileData = load("profile");
-        const loggedInUser =
-          profileData?.data?.name || profileData?.name || null;
+        const loggedInUser = getLoggedInUserName();
 
         if (loggedInUser) {
           const button = document.createElement("button");
@@ -100,11 +103,16 @@ async function renderRemoveButton() {
     const container = document.querySelector("#deleteButton");
     const id = getPostIdFromUrl();
 
+    console.log("Post ID from URL:", id);
+
     if ((container, id)) {
       try {
         const post = await getPost(id);
-        const userProfile = load("profile");
-        const loggedInUser = userProfile ? userProfile.name : null;
+
+        console.log("Fetched post:", post);
+
+        const loggedInUser = getLoggedInUserName();
+        console.log("Logged-in user:", loggedInUser);
 
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
@@ -115,6 +123,7 @@ async function renderRemoveButton() {
           });
 
           container.appendChild(button);
+
         }
       } catch (error) {
         console.error("Failed to render edit button:", error);
@@ -137,8 +146,11 @@ async function renderEditButton() {
       try {
         const post = await getPost(id);
 
-        const userProfile = load("profile");
-        const loggedInUser = userProfile ? userProfile.name : null;
+        const loggedInUser = getLoggedInUserName();
+        console.log("Logged-in user:", loggedInUser);
+
+        console.log("Post seller name:", post.seller?.name);
+        console.log("Logged-in user name:", loggedInUser);
 
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
@@ -156,6 +168,8 @@ async function renderEditButton() {
 }
 
 renderEditButton();
+
+
 
 /*
 
