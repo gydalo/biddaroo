@@ -77,9 +77,18 @@ function renderProfilePage(data) {
       listingTitle.textContent = `${listing.title}`;
       listingContainer.appendChild(listingTitle);
 
+
+      listingContainer.addEventListener("click", () => {
+        const targetUrl = `/biddaroo/post/index.html?id=${listing.id}`;
+        console.log(`Navigating to: ${targetUrl}`);
+        window.location.href = targetUrl;
+      });
+
       profileContainer.appendChild(listingContainer);
     });
   }
+
+
 
 
   if (wins.length > 0) {
@@ -93,11 +102,18 @@ function renderProfilePage(data) {
       winTitle.textContent = `${win.title}`;
       winContainer.appendChild(winTitle);
 
+      winContainer.addEventListener("click", () => {
+        const targetUrl = `/biddaroo/post/index.html?id=${wins.id}`;
+        console.log(`Navigating to: ${targetUrl}`);
+        window.location.href = targetUrl;
+      });
+
       profileContainer.appendChild(winContainer);
     });
 
   }
 
 }
+
 
 const data = JSON.parse(localStorage.getItem('profile'));
