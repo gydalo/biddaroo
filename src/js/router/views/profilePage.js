@@ -57,5 +57,40 @@ function renderProfilePage(data) {
     profileContainer.appendChild(bannerImage);
   }
 
+  
+  const listings = Array.isArray(data.listings) ? data.listings : data._count?.listings || [];
+  const wins = Array.isArray(data.wins) ? data.wins : data._count?.wins || [];
+
+  if (listings.length > 0) {
+    const listingsTitle = document.createElement("h2");
+    listingsTitle.textContent = "Listings";
+    profileContainer.appendChild(listingsTitle);
+
+    listings.forEach(listing => {
+      const listingContainer = document.createElement("div");
+      const listingTitle = document.createElement("p");
+      listingTitle.textContent = `${listing.title}`;
+      listingContainer.appendChild(listingTitle);
+
+
+      profileContainer.appendChild(listingContainer);
+    });
+  }
+
+  if (wins.length > 0) {
+    const winsTitle = document.createElement("h2");
+    winsTitle.textContent = "Wins";
+    profileContainer.appendChild(winsTitle);
+
+    wins.forEach(win => {
+      const winContainer = document.createElement("div");
+      const winTitle = document.createElement("p");
+      winTitle.textContent = `${win.title}`;
+      winContainer.appendChild(winTitle);
+
+      profileContainer.appendChild(winContainer);
+    });
+  }
+
 }
 
