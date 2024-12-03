@@ -93,7 +93,11 @@ function renderProfilePage(data) {
 
       profileContainer.appendChild(winContainer);
     });
+
   }
+
+  console.log("Listings:", listings);
+  console.log("Wins:", wins);
 }
 
 const data = JSON.parse(localStorage.getItem('profile'));
