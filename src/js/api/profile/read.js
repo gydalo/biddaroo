@@ -3,7 +3,7 @@ import { API_AUCTION_PROFILES } from "../../api/constants.js";
 
 
 export async function getProfiles() {
-    const updateProfileURL = `${API_AUCTION_PROFILES}`; //?_listings=true&_wins=true&_count=true
+    const updateProfileURL = `${API_AUCTION_PROFILES}?_listings=true&_wins=true&_count=true`;
     
     const response = await authFetch(updateProfileURL)
   
@@ -16,7 +16,7 @@ export async function getProfile(name) {
         throw new Error("Get requires a name");
     }
 
-    const getProfileURL = `${API_AUCTION_PROFILES}/${name}`; //?_listings=true&_wins=true&_count=true
+    const getProfileURL = `${API_AUCTION_PROFILES}/${name}?_listings=true&_wins=true&_count=true`;
 
     const response = await authFetch(getProfileURL);
 

@@ -8,7 +8,6 @@ export const profilePage = async () => {
   } else {
     try {
       const profileData = load('profile'); 
-      console.log("Loaded profile data:", profileData);
 
       const data = profileData.data ? profileData.data : profileData;
 
@@ -24,6 +23,7 @@ export const profilePage = async () => {
     }
   }
 };
+
 
 function renderProfilePage(data) {
   const profileContainer = document.getElementById("profile-container");
@@ -62,7 +62,10 @@ function renderProfilePage(data) {
     profileContainer.appendChild(bannerImage);
   }
 
-  const listings = Array.isArray(data.listings) ? data.listings : data._count?.listings || [];
+  const listings = data.listings || (data._count?.listings || []);
+  const wins = data.wins || (data._count?.wins || []);
+
+
   if (listings.length > 0) {
     const listingsTitle = document.createElement("h2");
     listingsTitle.textContent = "Listings";
@@ -79,7 +82,6 @@ function renderProfilePage(data) {
   }
 
 
-  const wins = Array.isArray(data.wins) ? data.wins : data._count?.wins || [];
   if (wins.length > 0) {
     const winsTitle = document.createElement("h2");
     winsTitle.textContent = "Wins";
@@ -96,9 +98,6 @@ function renderProfilePage(data) {
 
   }
 
-  console.log("Listings:", listings);
-  console.log("Wins:", wins);
 }
 
 const data = JSON.parse(localStorage.getItem('profile'));
-console.log(data);
