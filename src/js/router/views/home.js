@@ -6,6 +6,7 @@ import { getPosts } from "../../api/post/read.js";
 document.addEventListener("DOMContentLoaded", function () {
     const formLogin = document.getElementById("loginForm");
     const formCreateAcc = document.getElementById("registerForm");
+    const loggedOutHeading = document.getElementById("loggedOutHeading");
 
     const loggedInProfileButton = document.getElementById("loggedInProfileButton");
     const loggedInCreateButton = document.getElementById("loggedInCreateButton");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isLoggedIn()) {
         hide(formLogin);
         hide(formCreateAcc);
+        hide(loggedOutHeading);
         
         show(loggedInProfileButton);
         show(loggedInCreateButton);
