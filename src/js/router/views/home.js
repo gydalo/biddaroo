@@ -47,8 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   
-
-
 /*
   // Load posts test
   async function loadPosts() {
@@ -85,8 +83,8 @@ function getLast12Posts(posts) {
 document.addEventListener("DOMContentLoaded", loadPosts);
 */
 
+let currentIndex = 0;
 
-// Fix later
 async function loadPosts() {
   const postContainer = document.getElementById('post-container');
   
@@ -97,26 +95,49 @@ async function loadPosts() {
   const postList = posts.data || posts;
 
 
-  if (Array.isArray(postList) && postList.length > 0) {
-    const sortedPosts = postList.sort((b, a) => new Date(a.created) - new Date(b.created));
+   const activePosts = postList.filter(post => {
+    const endsAtDate = new Date(post.endsAt);
+    const currentDate = new Date();
+    return endsAtDate > currentDate;
+  });
 
-    const last12Posts = getLast12Posts(sortedPosts); 
+  if (activePosts.length > 0) {
 
-    console.log("Last 12 posts:", last12Posts); 
+    const sortedPosts = activePosts.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt));
 
-   
-    renderPostTemplates(last12Posts, postContainer);
-} else {
-    postContainer.innerHTML = '<p>No posts found.</p>'; 
+    loadNextPosts(sortedPosts, postContainer);
+
+    const loadMoreButton = document.getElementById("load-more");
+    if (loadMoreButton) {
+      loadMoreButton.addEventListener("click", () => {
+        loadNextPosts(sortedPosts, postContainer);
+      });
+    }
+  } else {
+    postContainer.innerHTML = '<p>No active posts found.</p>';
+  }
 }
+
+function loadNextPosts(sortedPosts, postContainer) {
+  const nextPosts = getNextPosts(sortedPosts, currentIndex);
+  
+  if (nextPosts.length === 0) {
+    const loadMoreButton = document.getElementById("load-more");
+    loadMoreButton.disabled = true; 
+    loadMoreButton.innerText = "No more posts available"; 
+    return;
+  }
+
+  renderPostTemplates(nextPosts, postContainer);
+  currentIndex += nextPosts.length;
 }
 
-function getLast12Posts(posts) {
-return posts.slice(0, 12);
+function getNextPosts(posts, startIndex) {
+  return posts.slice(startIndex, startIndex + 12);
 }
 
 document.addEventListener("DOMContentLoaded", loadPosts);
-//
+
 
 
 export function postTemplateA(postData) {
