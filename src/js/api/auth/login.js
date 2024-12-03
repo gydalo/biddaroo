@@ -1,6 +1,7 @@
 
 import * as storage from "./key.js";
 import { API_AUTH_LOGIN } from "../constants.js";
+import { getProfile } from "../profile/read.js";
 
 const method = "POST";
 
@@ -24,7 +25,16 @@ export async function login(profile) {
     const { accessToken, ...user } = jsonResponse.data; 
 
     storage.save("token", accessToken);
-    storage.save("profile", user);
+
+    try {
+        const profile = await getProfile(user.name);
+        storage.save("profile", profile);
+        console.log("Fetched and Saved Profile Data:", profile);
+    } catch (error) {
+        console.error("Failed to fetch full profile:", error);
+    }
+
+   /* storage.save("profile", user); */
 
     alert("You are now logged in");
     location.reload()

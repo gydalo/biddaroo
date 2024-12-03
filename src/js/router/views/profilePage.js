@@ -43,6 +43,11 @@ function renderProfilePage(data) {
   bioElement.textContent = data.bio || "No bio available";
   profileContainer.appendChild(bioElement);
 
+  const creditsElement = document.createElement("p");
+  creditsElement.textContent = data.credits !== undefined ? `Credits: ${data.credits}` : "Credits: Not available";
+  profileContainer.appendChild(creditsElement);
+
+
   if (data.avatar?.url) {
     const avatarImage = document.createElement("img");
     avatarImage.src = data.avatar.url;
@@ -57,10 +62,7 @@ function renderProfilePage(data) {
     profileContainer.appendChild(bannerImage);
   }
 
-  
   const listings = Array.isArray(data.listings) ? data.listings : data._count?.listings || [];
-  const wins = Array.isArray(data.wins) ? data.wins : data._count?.wins || [];
-
   if (listings.length > 0) {
     const listingsTitle = document.createElement("h2");
     listingsTitle.textContent = "Listings";
@@ -72,11 +74,12 @@ function renderProfilePage(data) {
       listingTitle.textContent = `${listing.title}`;
       listingContainer.appendChild(listingTitle);
 
-
       profileContainer.appendChild(listingContainer);
     });
   }
 
+
+  const wins = Array.isArray(data.wins) ? data.wins : data._count?.wins || [];
   if (wins.length > 0) {
     const winsTitle = document.createElement("h2");
     winsTitle.textContent = "Wins";
@@ -91,6 +94,7 @@ function renderProfilePage(data) {
       profileContainer.appendChild(winContainer);
     });
   }
-
 }
 
+const data = JSON.parse(localStorage.getItem('profile'));
+console.log(data);
