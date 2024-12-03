@@ -2,11 +2,61 @@ import { isLoggedIn, load } from "../../api/auth/key.js";
 import { getPost } from "../../api/post/read.js";
 import { getPostIdFromUrl } from "../views/post.js";
 import * as postMethods from "../../api/post/index.js";
+import { placeBid, fetchUserProfile } from "../views/bid.js";
+
+
+async function handleBidPlacement() {
+  document
+    .getElementById("place-bid-button")
+    .addEventListener("click", async () => {
+      const bidAmountInput = document.getElementById("bid-amount");
+      const bidAmount = parseFloat(bidAmountInput.value);
+
+      if (isNaN(bidAmount) || bidAmount <= 0) {
+        alert("Please enter a valid bid amount.");
+        return;
+      }
+
+      const listingId = getPostIdFromUrl();
+
+      try {
+        const userProfile = await fetchUserProfile();
+        console.log("Fetched user profile:", userProfile);
+
+        if (!userProfile) {
+          alert("Failed to retrieve user profile. Please log in again.");
+          return;
+        }
+
+        const userCredits = userProfile.credits;
+
+        if (bidAmount > userCredits) {
+          alert(
+            `You do not have enough credits to place this bid. Available credits: ${userCredits}`
+          );
+          return;
+        }
+
+        const result = await placeBid(listingId, bidAmount);
+        alert("Bid placed successfully!");
+        console.log("Bid result:", result);
+        location.reload()
+      } catch (error) {
+        alert("Failed to place bid. Please try again.");
+        console.error("Bid error:", error);
+      }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", handleBidPlacement);
+
+handleBidPlacement(); 
+
 
 function getLoggedInUserName() {
-    const profileData = load("profile");
-    return profileData?.data?.name || profileData?.name || null;
-  }
+  const profileData = load("profile");
+  return profileData?.data?.name || profileData?.name || null;
+}
 
 function logOut() {
   if (isLoggedIn()) {
@@ -118,7 +168,6 @@ async function renderRemoveButton() {
           });
 
           container.appendChild(button);
-
         }
       } catch (error) {
         console.error("Failed to render edit button:", error);
@@ -159,8 +208,6 @@ async function renderEditButton() {
 }
 
 renderEditButton();
-
-
 
 /*
 
