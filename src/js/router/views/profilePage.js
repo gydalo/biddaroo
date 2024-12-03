@@ -43,6 +43,11 @@ function renderProfilePage(data) {
   bioElement.textContent = data.bio || "No bio available";
   profileContainer.appendChild(bioElement);
 
+  const creditsElement = document.createElement("p");
+  creditsElement.textContent = data.credits !== undefined ? `Credits: ${data.credits}` : "Credits: Not available";
+  profileContainer.appendChild(creditsElement);
+
+
   if (data.avatar?.url) {
     const avatarImage = document.createElement("img");
     avatarImage.src = data.avatar.url;
@@ -57,5 +62,39 @@ function renderProfilePage(data) {
     profileContainer.appendChild(bannerImage);
   }
 
+  if (data.listings && data.listings.length > 0) {
+    const listingsTitle = document.createElement("h2");
+    listingsTitle.textContent = "Listings";
+    profileContainer.appendChild(listingsTitle);
+
+    data.listings.forEach(listing => {
+      const listingContainer = document.createElement("div");
+      const listingTitle = document.createElement("p");
+      listingTitle.textContent = `${listing.title}`;
+      listingContainer.appendChild(listingTitle);
+
+
+      profileContainer.appendChild(listingContainer);
+    });
+  }
+
+  if (data.wins && data.wins.length > 0) {
+    const winsTitle = document.createElement("h2");
+    winsTitle.textContent = "Wins";
+    profileContainer.appendChild(winsTitle);
+
+    data.wins.forEach(win => {
+      const winContainer = document.createElement("div");
+      const winTitle = document.createElement("p");
+      winTitle.textContent = `${win.title}`;
+      winContainer.appendChild(winTitle);
+
+      profileContainer.appendChild(winContainer);
+    });
+  }
+
+
 }
 
+const data = JSON.parse(localStorage.getItem('profile'));
+console.log(data);
