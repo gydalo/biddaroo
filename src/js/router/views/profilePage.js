@@ -1,4 +1,5 @@
-import { isLoggedIn, load } from '../../api/auth/key.js';
+import { isLoggedIn, load, save } from '../../api/auth/key.js';
+import { getProfile } from '../../api/profile/read.js';
 
 console.log("Loading profile from Local Storage:", load('profile')); 
 
@@ -7,17 +8,20 @@ export const profilePage = async () => {
     location.href = './';
   } else {
     try {
-      const profileData = load('profile'); 
+      const storedProfile = load('profile');
 
-      const data = profileData.data ? profileData.data : profileData;
+      const profileName = storedProfile?.data?.name;
 
-      if (!data || Object.keys(data).length === 0) {
-        console.error("Profile data is missing");
+      if (!profileName) {
+        console.error("Profile name is missing");
         return;
       }
 
-      renderProfilePage(data);  
+      const updatedProfile = await getProfile(profileName);
 
+      save('profile', updatedProfile);
+
+      renderProfilePage(updatedProfile.data);
     } catch (error) {
       console.error('Error loading profile:', error);
     }
