@@ -1,4 +1,7 @@
 import { getPost } from "../../api/post/read.js";
+import { isLoggedIn, load } from "../../api/auth/key.js";
+import { placeBid } from "./bid.js";
+import { getProfile } from "../../api/profile/read.js";
 
 export function getPostIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -12,6 +15,7 @@ if (postId) {
     .then((postData) => {
       renderPostData(postData),
       renderBidderInformation(postData);
+      renderBidInput(postData);
     })
     .catch((error) => {
       console.error("Error fetching post:", error);
@@ -99,4 +103,67 @@ function renderBidderInformation(postData) {
   }
 
   bidderContainer.appendChild(bidsContainer);
+}
+
+
+function renderBidInput(postData) {
+  const bidContainer = document.getElementById("bid-container");
+
+  if (!bidContainer) {
+    console.error("Bid container not found");
+    return;
+  }
+
+  if (!isLoggedIn()) {
+    bidContainer.innerHTML = "<p>You need to log in to place a bid.</p>";
+    return;
+  }
+
+  const userProfile = load("profile");
+  const loggedInUser = userProfile?.data?.name;
+  const sellerName = postData.seller?.name;
+
+  console.log(load("profile"))
+
+  if (loggedInUser === sellerName) {
+    bidContainer.innerHTML = "<p>You cannot bid on your own auction.</p>";
+    return;
+  }
+
+  const bidForm = document.createElement("form");
+
+  const bidInput = document.createElement("input");
+  bidInput.type = "number";
+  bidInput.placeholder = "Enter your bid amount";
+  bidInput.required = true;
+  bidInput.name = "bidAmount";
+
+  const bidButton = document.createElement("button");
+  bidButton.type = "submit";
+  bidButton.textContent = "Place Bid";
+
+  bidForm.appendChild(bidInput);
+  bidForm.appendChild(bidButton);
+
+  bidForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const bidAmount = parseFloat(bidInput.value);
+
+    if (isNaN(bidAmount) || bidAmount <= 0) {
+      alert("Please enter a valid bid amount.");
+      return;
+    }
+
+    placeBid(postData.id, bidAmount)
+      .then(() => {
+        alert("Bid placed successfully!");
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Failed to place bid:", error);
+        alert("Error placing bid. Please try again.");
+      });
+  });
+
+  bidContainer.appendChild(bidForm);
 }
