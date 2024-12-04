@@ -48,54 +48,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  
-/*
-  // Load posts test
-  async function loadPosts() {
-    const postContainer = document.getElementById('post-container');
-    
-    const posts = await getPosts();
-
-    console.log("Fetched posts:", posts);
-
-    const postList = posts.data || posts;
-
-   // Change this later
-    if (Array.isArray(postList) && postList.length > 0) {
-      const activePosts = postList.filter(post => {
-        const endsAtDate = new Date(post.endsAt);
-        const currentDate = new Date();
-        return endsAtDate > currentDate;
-      })
-
-      const sortedPosts = activePosts.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt))
-
-      const last12Posts = getLast12Posts(sortedPosts);
-       
-        renderPostTemplates(last12Posts, postContainer);
-    } else {
-        postContainer.innerHTML = '<p>No posts found.</p>'; 
-    }
-}
-
-function getLast12Posts(posts) {
-    return posts.slice(0, 12);
-}
-
-document.addEventListener("DOMContentLoaded", loadPosts);
-*/
-
 let currentIndex = 0;
 
 async function loadPosts() {
   const postContainer = document.getElementById('post-container');
-  
+  const searchBar = document.getElementById('searchInput');
   const posts = await getPosts();
 
-  console.log("Fetched posts:", posts);
-
   const postList = posts.data || posts;
-
 
    const activePosts = postList.filter(post => {
     const endsAtDate = new Date(post.endsAt);
@@ -103,11 +63,34 @@ async function loadPosts() {
     return endsAtDate > currentDate;
   });
 
-  if (activePosts.length > 0) {
+  let filteredPosts = activePosts;
 
+  if (activePosts.length > 0) {
     const sortedPosts = activePosts.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt));
 
-    loadNextPosts(sortedPosts, postContainer);
+    renderFilteredPosts(sortedPosts, postContainer);
+
+  searchBar.addEventListener("input", (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    const filteredPosts = sortedPosts.filter(post =>
+      post.title.toLowerCase().includes(searchTerm) ||
+      (post.seller?.name && post.seller.name.toLowerCase().includes(searchTerm))
+  );
+
+    postContainer.innerHTML = '';
+    renderFilteredPosts(filteredPosts, postContainer);
+});
+
+function renderFilteredPosts(posts, container) {
+  if (posts.length > 0) {
+      posts.forEach(post => {
+          const postElement = postTemplate(post);
+          container.appendChild(postElement);
+      });
+  } else {
+      container.innerHTML = '<p>No posts match your search.</p>';
+  }
+}
 
     const loadMoreButton = document.getElementById("load-more");
     if (loadMoreButton) {
@@ -169,7 +152,6 @@ export function postTemplate(postData) {
 
     post.addEventListener("click", () => {
         const targetUrl = /*add /biddaroo/ for the github version*/`/biddaroo/post/index.html?id=${postData.id}`;
-        console.log(`Navigating to: ${targetUrl}`);
         window.location.href = targetUrl;
     });
 
@@ -203,4 +185,3 @@ export function renderPostTemplate(postData, parent) {
 export function renderPostTemplates(postDataList, parent) {
     parent.append(...postDataList.map(postTemplate));
 }
-
