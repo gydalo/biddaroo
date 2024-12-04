@@ -1,8 +1,13 @@
 import { API_AUCTION_LISTINGS } from "../constants.js";
 import { authFetch } from "../auth/key.js";
 
+/*
 export async function getPosts() {
-    const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true&_bids=true`;
+    const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true&_bids=true&sort=created&order=desc`; 
+
+    */
+    export async function getPosts(page = 1, limit = 50) {
+        const updatePostURL = `${API_AUCTION_LISTINGS}?_seller=true&_bids=true&sort=created&order=desc&_active=true&limit=${limit}&page=${page}`;
 
     try {
         const response = await authFetch(updatePostURL);
