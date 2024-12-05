@@ -59,24 +59,6 @@ function renderPostData(postData) {
   const bidsCount = document.createElement("p");
   bidsCount.textContent = `Total Bids: ${postData._count?.bids ?? 0}`;
 
-/*
-  if (postData.media && Array.isArray(postData.media) && postData.media.length > 0) {
-    postData.media.forEach((mediaItem) => {
-      if (mediaItem && mediaItem.url) { 
-        const auctionImage = document.createElement("img");
-  
-
-    auctionImage.setAttribute("src", mediaItem.url);
-    auctionImage.alt = mediaItem.alt || `Image from ${postData.title}`;
-
-    postContainer.appendChild(auctionImage);
-        }
-      });
-  } else {
-    console.log("No media available for this post.");
-  }
-    */
-
 
   postContainer.appendChild(auctionTitle);
   postContainer.appendChild(auctionDescription);
@@ -169,7 +151,6 @@ function renderBidInput(postData) {
 
     placeBid(postData.id, bidAmount)
       .then(() => {
-        alert("Bid placed successfully!");
         location.reload();
       })
       .catch((error) => {
