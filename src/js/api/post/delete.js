@@ -20,7 +20,7 @@ export async function removePost(id) {
     
     alert("You have deleted the post");
 
-    window.location.href = "/index.html";
+    window.location.href = "/biddaroo/index.html";
 
 
 }
