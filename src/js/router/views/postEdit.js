@@ -7,6 +7,7 @@ function getPostIdFromUrl() {
 }
 
 const form = document.querySelector("#editListing");
+const mediaContainer = document.querySelector("#media-container");
 
 if (form) {
     const postId = getPostIdFromUrl();
@@ -28,16 +29,26 @@ if (form) {
                 form.endsAt.value = endsAtDate.toISOString().substring(0, 16);
 
             }
-            if (form.mediaURL) {
-                if (post.media && Array.isArray(post.media) && post.media.length > 0) {
-                    form.mediaURL.value = post.media[0].url || '';
-                    form.mediaALT.value = post.media[0].alt || '';
-                } else {
-                    console.log("Media data is undefined or empty");
-                    form.mediaURL.value = '';
-                    form.mediaALT.value = '';
+
+            mediaContainer.innerHTML = "";
+
+            if (post.media && Array.isArray(post.media) && post.media.length > 0) {
+                post.media.forEach((mediaItem, index) => {
+                    const mediaInput = document.createElement("input");
+                    mediaInput.type = "url";
+                    mediaInput.name = "mediaURL";
+                    mediaInput.placeholder = "Image URL";
+                    mediaInput.value = mediaItem.url || "";
+                    mediaContainer.appendChild(mediaInput);
+                  });
                 }
-            }
+            
+                const emptyInput = document.createElement("input");
+                emptyInput.type = "url";
+                emptyInput.name = "mediaURL";
+                emptyInput.placeholder = "Image URL";
+                mediaContainer.appendChild(emptyInput);
+
         } catch (error) {
             console.error("Failed to fetch post data:", error);
             alert("Failed to load post data.");
@@ -46,6 +57,27 @@ if (form) {
 
     loadPostData();
 
+    mediaContainer.addEventListener("input", (event) => {
+        const allInputs = mediaContainer.querySelectorAll("input[name='mediaURL']");
+        const lastInput = allInputs[allInputs.length - 1];
+    
+        if (event.target === lastInput && allInputs.length < 8 && lastInput.value.trim() !== "") {
+          const newInput = document.createElement("input");
+          newInput.type = "url";
+          newInput.name = "mediaURL";
+          newInput.placeholder = "Image URL";
+          mediaContainer.appendChild(newInput);
+        }
+    
+        const emptyInputs = Array.from(allInputs).filter((input) => input.value.trim() === "");
+        if (emptyInputs.length > 0 && allInputs.length > 1) {
+          const lastEmptyInput = emptyInputs[emptyInputs.length - 1];
+          if (lastEmptyInput === lastInput) {
+            mediaContainer.removeChild(lastEmptyInput);
+          }
+        }
+      });
+
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -53,15 +85,20 @@ if (form) {
         const formValues = Object.fromEntries(formData.entries());
         const endsAt = new Date(formValues.endsAt).toISOString();
 
+        const mediaInputs = mediaContainer.querySelectorAll("input[name='mediaURL']");
+        const media = Array.from(mediaInputs)
+          .filter((input) => input.value.trim() !== "")
+          .map((input) => ({
+            url: input.value.trim(),
+            alt: formValues.mediaALT || "",
+          }));
+
         const updatedPost = {
             id: postId,
             title: formValues.title,
             description: formValues.description,
             endsAt: endsAt,
-            media: [{
-                url: formValues.mediaURL,
-                alt: formValues.mediaALT
-            }]
+            media: media,
         };
 
 

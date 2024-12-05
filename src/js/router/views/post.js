@@ -1,7 +1,7 @@
 import { getPost } from "../../api/post/read.js";
 import { isLoggedIn, load } from "../../api/auth/key.js";
 import { placeBid } from "./bid.js";
-import { getProfile } from "../../api/profile/read.js";
+import { initializeCarousel } from "./carousel.js";
 
 export function getPostIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -16,6 +16,12 @@ if (postId) {
       renderPostData(postData),
       renderBidderInformation(postData);
       renderBidInput(postData);
+
+      if (postData.media && Array.isArray(postData.media) && postData.media.length > 0) {
+        initializeCarousel(postData.media);
+      } else {
+        console.log("No media available for this post.");
+      }
     })
     .catch((error) => {
       console.error("Error fetching post:", error);
@@ -53,17 +59,23 @@ function renderPostData(postData) {
   const bidsCount = document.createElement("p");
   bidsCount.textContent = `Total Bids: ${postData._count?.bids ?? 0}`;
 
+/*
+  if (postData.media && Array.isArray(postData.media) && postData.media.length > 0) {
+    postData.media.forEach((mediaItem) => {
+      if (mediaItem && mediaItem.url) { 
+        const auctionImage = document.createElement("img");
+  
 
-  if (postData.media && postData.media.length > 0) {
-    const auctionImage = document.createElement("img");
-
-    auctionImage.setAttribute("src", postData.media[0].url);
-    auctionImage.alt = `Image from ${postData.title}`;
+    auctionImage.setAttribute("src", mediaItem.url);
+    auctionImage.alt = mediaItem.alt || `Image from ${postData.title}`;
 
     postContainer.appendChild(auctionImage);
+        }
+      });
   } else {
     console.log("No media available for this post.");
   }
+    */
 
 
   postContainer.appendChild(auctionTitle);
@@ -73,6 +85,7 @@ function renderPostData(postData) {
   postContainer.appendChild(auctionEnds);
   postContainer.appendChild(auctionDate);
 }
+
 
 
 function renderBidderInformation(postData) {
