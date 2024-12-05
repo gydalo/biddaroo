@@ -6,6 +6,13 @@ import { placeBid, fetchUserProfile } from "../views/bid.js";
 
 
 async function handleBidPlacement() {
+  const currentUrl = window.location.pathname;
+  const postId = getPostIdFromUrl();
+
+  const expectedUrl = `/biddaroo/post/index.html`;
+
+  if (currentUrl === expectedUrl && postId) {
+    console.log("On the correct bid page. Initializing bid placement...");
   document
     .getElementById("place-bid-button")
     .addEventListener("click", async () => {
@@ -46,6 +53,7 @@ async function handleBidPlacement() {
         console.error("Bid error:", error);
       }
     });
+}
 }
 
 document.addEventListener("DOMContentLoaded", handleBidPlacement);

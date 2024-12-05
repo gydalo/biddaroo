@@ -31,6 +31,14 @@ export function initializeCarousel(media) {
     });
 
     const buttons = document.querySelectorAll("[data-carousel-button]");
+
+    if (media.length <= 1) {
+        buttons.forEach(button => {
+            button.style.display = 'none';
+        });
+        return; 
+    }
+
     buttons.forEach(button => {
         button.addEventListener("click", () => {
             const offset = button.dataset.carouselButton === "next" ? 1 : -1;
