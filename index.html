@@ -6,20 +6,46 @@
     <title>Document</title>
     <script type="module" src="./src/app.js"></script>
     <script type="module" src="./src/js/router/views/home.js"></script>
-    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./src/css/normalcss.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Ysabeau+SC:wght@1..1000&display=swap" rel="stylesheet">
 </head>
-<body>
-  <header>
+<body class="bg-background text-white">
+  <header class="bg-header">
+    <div class="flex space-x-4 items-center text-sm">
+      <div>
+    <div><a href="/biddaroo/index.html"><img class="w-10" src="/images/logo-removebg-preview.png" alt="Logo"></a></div>
+  </div>
+  <div class="flex items-end">
     <div id="logOutButton"></div>
     <div id="loggedInProfileButton" class="form--hidden"></div>
+  </div>
+    </div>
   </header>
-    
-<div class="container">
-  <h1 id="loggedOutHeading" class="form--unhidden">Join now to grab the best deals before they’re gone!</h1>
-        <form class="form--unhidden" id="loginForm" name="login" method="POST">
-            <h2>Login</h2>
+    <main class="min-h-screen *:m-0 m-20">
+<div class="container flex align-middle justify-center gap-20">
+  <div class="basis-1/3">
+    <h1 class="font-heading text-huge">Biddaroo</h1>
+    <h2 class="font-heading text-xl tracking-wide">Catch Every Deal with Biddaroo – Your Auction, Your Advantage.</h2>
+    <br>
+    <p class="font-p tracking-wide leading-relaxed">Welcome to Biddaroo – the ultimate platform for buying and selling through live auctions! Biddaroo connects sellers looking 
+      to auction off valuable items with bidders eager to find their next great deal. Sellers can easily list items up for auction, 
+      and with just a few clicks, buyers can start bidding to win unique and high-value finds.</p> <br>
+      <p class="font-p tracking-wide leading-relaxed">Whether you’re looking to auction away rare collectibles, gadgets, fashion, or everyday items, Biddaroo offers a seamless, secure, 
+        and exciting auction experience. Join the bidding action on Biddaroo today and discover a world of unbeatable deals!</p>
+        <div class="">
+  <input type="text" id="searchInput" class="bg-transparent mt-20 outline outline-1 p-1 outline-white-500/50" placeholder="Search for listings..." />
+</div>
+</div>
+  <div class="basis-1/3">
+  <h1 id="loggedOutHeading" class="form--unhidden font-heading text-lg">Join now to grab the best deals before they’re gone!</h1>
+        <form class="form--unhidden bg-transparent" id="loginForm" name="login" method="POST">
+            <h2 class="font-h2">Login</h2>
           <div class="form-inputs">
-            <input 
+            <input
+            class="p-1 bg-transparent"
             placeholder="Email" 
             id="email" type="email" 
             name="email" 
@@ -32,25 +58,26 @@
             type="password" 
             name="password" 
             id="password" 
-            class="p-1" 
+            class="p-1 bg-transparent" 
             required
             />
             </div>
             <div class="form-inputs">
-          <button type="submit">Login</button>
+          <button type="submit" class="font-h2 font-h2 text-center bg-button py-1 px-3">Login</button>
         </div>
 
-        <p class="form-text" id="toregisterForm"><a class="form-link" href="#registerForm" id="linkRegisterForm">Don't have an account? Register now</a></p>
+        <p class="form-text" id="toregisterForm"><a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#registerForm" id="linkRegisterForm">Don't have an account? Register now</a></p>
     </form>
 
 
-    <form class="form--hidden" id="registerForm" name="register" method="POST">
-        <h2>Register</h2>
+    <form class="form--hidden bg-transparent" id="registerForm" name="register" method="POST">
+        <h2 class="font-h2">Register</h2>
       <div class="form-inputs">
         <input 
         placeholder="Email" 
         id="newEmail" type="email" 
         name="email" 
+        class="p-1 bg-transparent" 
         required
         pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
         title="Please enter a valid noroff.no or stud.noroff.no address"
@@ -62,6 +89,7 @@
         id="name"
         type="text" 
         name="name" 
+        class="p-1 bg-transparent" 
         required
         maxlength="20"
         pattern="^[\w]+$"
@@ -73,25 +101,28 @@
         placeholder="Password" 
         type="password" name="password" 
         id="newPassword" 
+        class="p-1 bg-transparent" 
         required
         minlength="8"
          />
       </div>
       <div class="form-inputs">
-      <button type="submit">Register</button>
+      <button type="submit" class="font-h2">Register</button>
     </div>
     <p class="form-text" id="toLogin">
-    <a class="form-link" href="#changeLogin" id="linkLogin">Already have an account? Sign in here</a>
+    <a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#changeLogin" id="linkLogin">Already have an account? Sign in here</a>
   </p>
 </form>
-<div>
-  <h1 id="loggedInHeading" class="form--hidden">You’re just one click away from making money. Start now. </h1>
-  <div id="loggedInCreateButton" class="form--hidden"></div>
+<div class="">
+  <h1 id="loggedInHeading" class="form--hidden font-heading text-xl">You’re just one click away from making money. Start now. </h1>
+  <div id="loggedInCreateButton" class="form--hidden font-h2"></div>
+
+</div>
+</div>
 </div>
 
-<input type="text" id="searchInput" placeholder="Search for listings..." />
-
-<div id="post-container"></div>
+<div class="pt-56"><h2 class="text-center font-heading text-xl">Auctions</h2></div>
+<div id="post-container" class="flex flex-col items-center pt-20 space-y-24 text-center"></div>
 
 <button id="load-more">Load More</button>
 
