@@ -30,6 +30,8 @@ export default {
         massive: "5rem", // Extra-large font size for hero sections (80px)
       },
       spacing: {
+        '12': '2rem', 
+        '14': '3rem', 
         '16': '4rem',      // Slightly larger than 15
         '20': '5rem',      // Common size
         '24': '6rem',      // Common size

@@ -120,6 +120,7 @@ async function renderEditProfileButton() {
         if (loggedInUser) {
           const button = document.createElement("button");
           button.innerText = "Edit Profile";
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
           button.addEventListener("click", () => {
             window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`;
           });
@@ -141,6 +142,7 @@ function renderCreateButton() {
     if (container) {
       const button = document.createElement("button");
       button.innerText = "Create Listing";
+      button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
       button.addEventListener("click", () => {
         // Change to /Biddaroo/ for github version
         window.location.href = `/biddaroo/post/create/index.html`;
@@ -170,6 +172,8 @@ async function renderRemoveButton() {
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
           button.innerText = "Delete Post";
+
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
 
           button.addEventListener("click", () => {
             postMethods.removePost(id);
@@ -203,6 +207,7 @@ async function renderEditButton() {
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
           button.innerText = "Edit Post";
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
           button.addEventListener("click", () => {
             window.location.href = `/biddaroo/post/edit/index.html?id=${id}`;
           });

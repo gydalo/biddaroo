@@ -38,20 +38,25 @@ function renderPostData(postData) {
 
   const auctionTitle = document.createElement("h2");
   auctionTitle.textContent = postData.title;
+  auctionTitle.classList.add("font-h2", "text-xl")
 
   const auctionDescription = document.createElement("p");
   auctionDescription.textContent = postData.description;
+  auctionDescription.classList.add("font-p")
 
   const sellerName = document.createElement("p");
   sellerName.textContent = `Seller: ${postData.seller?.name}`;
+  sellerName.classList.add("font-p")
 
   const auctionEnds = document.createElement("p");
+  auctionEnds.classList.add("font-p")
 
   auctionEnds.textContent = `Auction ends ${new Date(
     postData.endsAt
   ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
 
   const auctionDate = document.createElement("p");
+  auctionDate.classList.add("font-p")
   auctionDate.textContent = `Created on: ${new Date(
     postData.created
   ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
@@ -132,10 +137,12 @@ function renderBidInput(postData) {
   bidInput.placeholder = "Enter your bid amount";
   bidInput.required = true;
   bidInput.name = "bidAmount";
+  bidInput.classList.add('p-1', 'bg-transparent', 'bg-transparent', 'mt-20', 'outline', 'outline-1', 'outline-white/45' )
 
   const bidButton = document.createElement("button");
   bidButton.type = "submit";
   bidButton.textContent = "Place Bid";
+  bidButton.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
 
   bidForm.appendChild(bidInput);
   bidForm.appendChild(bidButton);

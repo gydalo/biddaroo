@@ -1,28 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <script type="module" src="../src/app.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/style.css">
-    <link rel="stylesheet" href="../src/css/normalcss.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <link rel="stylesheet" href="../src/css/normalcss.css" />
     <title>Document</title>
-</head>
-<body class="bg-background text-white">
-    <div id="logOutButton"></div>
-    <div id="loggedInProfileButton"></div>
-    <div data-carousel class="carousel relative flex items-center justify-center">
-        <button class="carusel-button prev absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-white hover:text-black text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300" aria-label="Previous Slide" data-carousel-button="prev">◀</button>
-        <ul data-slides class="w-full flex overflow-hidden space-x-4"></ul>
-        <button class="carousel-button next absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-white hover:text-black text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300" aria-label="Next Slide" data-carousel-button="next">▶</button>
+    <script
+      src="https://kit.fontawesome.com/03b5ffc1d7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Ysabeau+SC:wght@1..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-background text-white">
+    <div id="logOutButton" class="font-p"></div>
+    <div id="loggedInProfileButton" class="font-p"></div>
+    <div class="flex justify-center items-center min-h-screen bg-gray-800">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-screen-lg w-full">
+        <div
+          data-carousel
+          class="flex flex-col justify-center items-center p-6 w-full md:w-3/4 mx-auto">
+          <ul
+            data-slides
+            class="w-full flex justify-center items-center overflow-hidden space-x-4 h-64 md:h-80"></ul>
+
+          <div class="flex justify-center mt-4 space-x-4">
+            <button
+              class="carousel-button prev text-white text-2xl p-3"
+              data-carousel-button="prev">
+              <i class="fa-solid fa-circle-arrow-left"></i>
+            </button>
+            <button
+              class="carousel-button next text-white text-2xl p-3"
+              data-carousel-button="next">
+              <i class="fa-solid fa-circle-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center items-center p-6">
+          <div id="post-container" class="mb-4 w-full max-w-md p-4"></div>
+          <div id="bidder-container" class="mb-4 w-full max-w-md p-4"></div>
+          <div class="container-buttons-post flex space-x-4">
+            <div id="editButton"></div>
+            <div id="deleteButton"></div>
+          </div>
+          <div id="bid-container" class="mt-4 w-full max-w-md p-4"></div>
+          <div
+            id="place-bid-button">
+          </div>
+        </div>
       </div>
-    <div id="post-container"></div>
-    <div id="bidder-container"></div>
-    <div class="container-buttons-post">
-    <div id="editButton"></div>
-    <div id="deleteButton"></div>
     </div>
-    <div id="bid-container"></div>
-    <div id="place-bid-button"></div>
-</body>
+  </body>
 </html>

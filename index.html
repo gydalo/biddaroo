@@ -16,7 +16,7 @@
   <header class="bg-header">
     <div class="flex space-x-4 items-center text-sm">
       <div>
-    <div><a href="/biddaroo/index.html"><img class="w-10" src="/images/logo-removebg-preview.png" alt="Logo"></a></div>
+    <div><a href="/biddaroo/index.html"><img class="w-10" src="./images/logo-removebg-preview.png" alt="Logo"></a></div>
   </div>
   <div class="flex items-end">
     <div id="logOutButton"></div>
@@ -36,16 +36,17 @@
       <p class="font-p tracking-wide leading-relaxed">Whether you’re looking to auction away rare collectibles, gadgets, fashion, or everyday items, Biddaroo offers a seamless, secure, 
         and exciting auction experience. Join the bidding action on Biddaroo today and discover a world of unbeatable deals!</p>
         <div class="">
-  <input type="text" id="searchInput" class="bg-transparent mt-20 outline outline-1 p-1 outline-white-500/50" placeholder="Search for listings..." />
+  <input type="text" id="searchInput" class="bg-transparent mt-20 outline outline-1 p-1 outline-white/45" placeholder="Search for listings..." />
 </div>
 </div>
-  <div class="basis-1/3">
+  <div class="basis-1/3 flex-grow flex items-center flex-col mt-32">
   <h1 id="loggedOutHeading" class="form--unhidden font-heading text-lg">Join now to grab the best deals before they’re gone!</h1>
-        <form class="form--unhidden bg-transparent" id="loginForm" name="login" method="POST">
+  <div class="px-14 py-12 bg-transparent outline outline-1 outline-white/45">
+        <form class="form--unhidden text-center space-y-4" id="loginForm" name="login" method="POST">
             <h2 class="font-h2">Login</h2>
           <div class="form-inputs">
             <input
-            class="p-1 bg-transparent"
+            class="bg-transparent outline outline-1 p-1 outline-white/45"
             placeholder="Email" 
             id="email" type="email" 
             name="email" 
@@ -58,26 +59,26 @@
             type="password" 
             name="password" 
             id="password" 
-            class="p-1 bg-transparent" 
+            class="bg-transparent outline outline-1 p-1 outline-white/45" 
             required
             />
             </div>
-            <div class="form-inputs">
-          <button type="submit" class="font-h2 font-h2 text-center bg-button py-1 px-3">Login</button>
+            <p class="font-h2">Don't have an account? </p>
+        <p class="form-text" id="toregisterForm"><a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#registerForm" id="linkRegisterForm">Register now</a></p>
+        <div class="form-inputs">
+          <button type="submit" class="font-h2 text-center bg-button py-1 px-3">Login</button>
         </div>
-
-        <p class="form-text" id="toregisterForm"><a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#registerForm" id="linkRegisterForm">Don't have an account? Register now</a></p>
-    </form>
+      </form>
 
 
-    <form class="form--hidden bg-transparent" id="registerForm" name="register" method="POST">
+    <form class="form--hidden bg-transparent outline outline-1 p-1 outline-white/45" id="registerForm" name="register" method="POST">
         <h2 class="font-h2">Register</h2>
       <div class="form-inputs">
         <input 
         placeholder="Email" 
         id="newEmail" type="email" 
         name="email" 
-        class="p-1 bg-transparent" 
+        class="bg-transparent outline outline-1 p-1 outline-white/45" 
         required
         pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
         title="Please enter a valid noroff.no or stud.noroff.no address"
@@ -89,30 +90,32 @@
         id="name"
         type="text" 
         name="name" 
-        class="p-1 bg-transparent" 
+        class="bg-transparent outline outline-1 p-1 outline-white/45" 
         required
         maxlength="20"
         pattern="^[\w]+$"
         title="Please enter a username using only letters and numbers"
         />
       </div>
-      <div class="form-inputs">
+      <div class="form-inputs gap-1">
         <input 
         placeholder="Password" 
         type="password" name="password" 
         id="newPassword" 
-        class="p-1 bg-transparent" 
+        class="bg-transparent outline outline-1 p-1 outline-white/45" 
         required
         minlength="8"
          />
       </div>
-      <div class="form-inputs">
-      <button type="submit" class="font-h2">Register</button>
-    </div>
+      <p class="font-h2">Already have an account? </p>
     <p class="form-text" id="toLogin">
-    <a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#changeLogin" id="linkLogin">Already have an account? Sign in here</a>
+    <a class="form-link font-h2 hover:underline hover:underline-offset-4 hover:decoration-1" href="#changeLogin" id="linkLogin">Sign in here</a>
   </p>
+  <div class="form-inputs">
+    <button type="submit" class="font-h2">Register</button>
+  </div>
 </form>
+</div>
 <div class="">
   <h1 id="loggedInHeading" class="form--hidden font-heading text-xl">You’re just one click away from making money. Start now. </h1>
   <div id="loggedInCreateButton" class="form--hidden font-h2"></div>
