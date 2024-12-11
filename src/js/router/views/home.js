@@ -196,7 +196,7 @@ export function postTemplate(postData) {
 
   const bidButton = document.createElement("button");
   bidButton.textContent = "BID";
-  bidButton.classList.add("font-h2", "text-center", "bg-button", "py-1", "px-3");
+  bidButton.classList.add("font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover");
 
   post.append(bidButton);
   bidButton.addEventListener("click", () => {

@@ -19,18 +19,20 @@
     />
   </head>
   <body class="bg-background text-white">
+    <header>
     <div id="logOutButton" class="font-p"></div>
     <div id="loggedInProfileButton" class="font-p"></div>
-    <div class="flex justify-center items-center min-h-screen bg-gray-800">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-screen-lg w-full">
+</header>
+    <div class="flex justify-center items-center min-h-screen">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-8 max-w-screen-lg w-full">
         <div
           data-carousel
-          class="flex flex-col justify-center items-center p-6 w-full md:w-3/4 mx-auto">
+          class="flex flex-col justify-center items-center w-full mx-auto">
           <ul
             data-slides
             class="w-full flex justify-center items-center overflow-hidden space-x-4 h-64 md:h-80"></ul>
 
-          <div class="flex justify-center mt-4 space-x-4">
+          <div class="flex justify-center space-x-4">
             <button
               class="carousel-button prev text-white text-2xl p-3"
               data-carousel-button="prev">
@@ -44,19 +46,24 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-center items-center p-6">
-          <div id="post-container" class="mb-4 w-full max-w-md p-4"></div>
-          <div id="bidder-container" class="mb-4 w-full max-w-md p-4"></div>
-          <div class="container-buttons-post flex space-x-4">
-            <div id="editButton"></div>
-            <div id="deleteButton"></div>
+        <div class="flex flex-col justify-center items-center md:p-6">
+            <div>
+        <div id="renderTitle" class="w-full max-w-md"></div>
+        <div class="flex justify-between">
+          <div id="renderCreateEndsAt"></div>
+        </div>
+          <div id="post-container" class="w-full max-w-md"></div>
+          <div class="text-center mt-4 space-y-4">
+          <div id="bidder-container" class="w-full max-w-md"></div>
+          <div class="flex">
           </div>
-          <div id="bid-container" class="mt-4 w-full max-w-md p-4"></div>
-          <div
-            id="place-bid-button">
+          <div id="bid-container" class="items-center"></div>
+        </div>
+        <div id="editButton"></div>
+        <div id="deleteButton"></div>
+        </div>
           </div>
         </div>
       </div>
-    </div>
   </body>
 </html>

@@ -13,8 +13,10 @@ const postId = getPostIdFromUrl();
 if (postId) {
   getPost(postId)
     .then((postData) => {
+      renderTitle(postData),
+      renderCreateEndsAt(postData),
       renderPostData(postData),
-      renderBidderInformation(postData);
+      renderBidderInformation(postData),
       renderBidInput(postData);
 
       if (postData.media && Array.isArray(postData.media) && postData.media.length > 0) {
@@ -28,6 +30,47 @@ if (postId) {
     });
 }
 
+function renderTitle(postData) {
+  const renderTitle = document.getElementById("renderTitle")
+
+  if (!renderTitle) {
+    console.error("Post container not found");
+    return;
+  }
+
+  const auctionTitle = document.createElement("h2");
+  auctionTitle.textContent = postData.title;
+  auctionTitle.classList.add("font-h2", "text-xl", "text-center")
+
+  renderTitle.appendChild(auctionTitle);
+}
+
+function renderCreateEndsAt(postData) {
+  const renderCreateEndsAt = document.getElementById("renderCreateEndsAt")
+
+  if (!renderCreateEndsAt) {
+    console.error("Post container not found");
+    return;
+  }
+
+  const auctionEnds = document.createElement("p");
+
+  auctionEnds.textContent = `Auction ends ${new Date(
+    postData.endsAt
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
+
+  auctionEnds.classList.add("font-p", "text-xs")
+
+  const auctionDate = document.createElement("p");
+  auctionDate.classList.add("font-p", "text-xs")
+  auctionDate.textContent = `Created on: ${new Date(
+    postData.created
+  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
+
+  renderCreateEndsAt.appendChild(auctionEnds);
+  renderCreateEndsAt.appendChild(auctionDate);
+}
+
 function renderPostData(postData) {
   const postContainer = document.getElementById("post-container");
 
@@ -35,42 +78,16 @@ function renderPostData(postData) {
     console.error("Post container not found");
     return;
   }
-
-  const auctionTitle = document.createElement("h2");
-  auctionTitle.textContent = postData.title;
-  auctionTitle.classList.add("font-h2", "text-xl")
-
   const auctionDescription = document.createElement("p");
   auctionDescription.textContent = postData.description;
   auctionDescription.classList.add("font-p")
 
   const sellerName = document.createElement("p");
-  sellerName.textContent = `Seller: ${postData.seller?.name}`;
-  sellerName.classList.add("font-p")
+  sellerName.textContent = `Auctioned by ${postData.seller?.name}`;
+  sellerName.classList.add("font-p", "text-xs")
 
-  const auctionEnds = document.createElement("p");
-  auctionEnds.classList.add("font-p")
-
-  auctionEnds.textContent = `Auction ends ${new Date(
-    postData.endsAt
-  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
-
-  const auctionDate = document.createElement("p");
-  auctionDate.classList.add("font-p")
-  auctionDate.textContent = `Created on: ${new Date(
-    postData.created
-  ).toLocaleString([], {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'})}`;
-
-  const bidsCount = document.createElement("p");
-  bidsCount.textContent = `Total Bids: ${postData._count?.bids ?? 0}`;
-
-
-  postContainer.appendChild(auctionTitle);
   postContainer.appendChild(auctionDescription);
   postContainer.appendChild(sellerName);
-  postContainer.appendChild(bidsCount);
-  postContainer.appendChild(auctionEnds);
-  postContainer.appendChild(auctionDate);
 }
 
 
@@ -86,8 +103,9 @@ function renderBidderInformation(postData) {
   const bidsContainer = document.createElement("div");
   bidsContainer.classList.add("bids-container");
 
-  const bidsTitle = document.createElement("h3");
+  const bidsTitle = document.createElement("h2");
   bidsTitle.textContent = "Bids:";
+  bidsTitle.classList.add("p-h2");
   bidsContainer.appendChild(bidsTitle);
 
   if (postData.bids && postData.bids.length > 0) {
@@ -95,6 +113,7 @@ function renderBidderInformation(postData) {
       const bidElement = document.createElement("p");
       bidElement.textContent = `Bidder: ${bid.bidder.name}, Amount: ${bid.amount}`;
       bidsContainer.appendChild(bidElement);
+      bidElement.classList.add("font-p");
     });
   } else {
     const noBidsMessage = document.createElement("p");
@@ -131,18 +150,19 @@ function renderBidInput(postData) {
   }
 
   const bidForm = document.createElement("form");
+  bidForm.classList.add('items-center')
 
   const bidInput = document.createElement("input");
   bidInput.type = "number";
   bidInput.placeholder = "Enter your bid amount";
   bidInput.required = true;
   bidInput.name = "bidAmount";
-  bidInput.classList.add('p-1', 'bg-transparent', 'bg-transparent', 'mt-20', 'outline', 'outline-1', 'outline-white/45' )
+  bidInput.classList.add('p-1', 'bg-transparent', 'bg-transparent', 'outline', 'outline-1', 'outline-white/45' )
 
   const bidButton = document.createElement("button");
   bidButton.type = "submit";
   bidButton.textContent = "Place Bid";
-  bidButton.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
+  bidButton.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "mt-4")
 
   bidForm.appendChild(bidInput);
   bidForm.appendChild(bidButton);
