@@ -34,6 +34,7 @@ export default {
         '14': '3rem', 
         '16': '4rem',      // Slightly larger than 15
         '20': '5rem',      // Common size
+        '22': '5.25rem',      // Common size
         '24': '6rem',      // Common size
         '32': '8rem',      // Larger step
         '40': '10rem',     // Larger step

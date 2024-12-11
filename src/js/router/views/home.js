@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const formLogin = document.getElementById("loginForm");
   const formCreateAcc = document.getElementById("registerForm");
   const loggedOutHeading = document.getElementById("loggedOutHeading");
+  const outlineForm = document.getElementById("outlineForm");
 
   const loggedInProfileButton = document.getElementById(
     "loggedInProfileButton"
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     hide(formLogin);
     hide(formCreateAcc);
     hide(loggedOutHeading);
+    hide(outlineForm);
 
     show(loggedInProfileButton);
     show(loggedInCreateButton);
