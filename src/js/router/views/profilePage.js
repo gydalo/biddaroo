@@ -85,7 +85,7 @@ function renderProfilePage(data) {
   }
 
   const bannerSection = document.createElement("div");
-  bannerSection.classList.add("banner-section");
+  bannerSection.classList.add("banner-section", "w-full", "relative", "overflow-hidden", "h-80");
 
   if (data.banner?.url) {
     const bannerImage = document.createElement("img");
@@ -101,12 +101,12 @@ function renderProfilePage(data) {
 
 
   const listingsWinsSection = document.createElement("div");
-  listingsWinsSection.classList.add("flex", "flex-col", "justify-center", "md:flex-row", "gap-4", "items-center", "h-screen");
+  listingsWinsSection.classList.add("flex", "flex-col", "justify-center", "md:flex-row", "gap-4", "items-center");
 
 
   const listings = data.listings || (data._count?.listings || []);
   const listingsSection = document.createElement("div");
-  listingsSection.classList.add("listings-section", "md:basis-1/3", "justify-center", "md:flex-row", "max-w-sm");
+  listingsSection.classList.add("listings-section", "md:basis-1/3", "justify-center", "md:flex-row");
 
   if (listings.length > 0) {
     const listingsTitle = document.createElement("h2");

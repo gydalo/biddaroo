@@ -1,4 +1,3 @@
-
 import { createPost } from "../../api/post/create.js";
 
 const form = document.querySelector("#createListing");
@@ -7,6 +6,9 @@ const mediaContainer = document.querySelector("#media-container");
 if (form && mediaContainer) {
     mediaContainer.addEventListener("input", (event) => {
    
+
+      const inputSection = document.createElement('div');
+      inputSection.classList.add('flex', 'flex-col', 'space-y-4')
         const allInputs = mediaContainer.querySelectorAll("input[name='mediaURL']");
         const lastInput = allInputs[allInputs.length - 1];
         
@@ -17,6 +19,7 @@ if (form && mediaContainer) {
           newInput.name = "mediaURL";
           newInput.placeholder = "Image URL";
           mediaContainer.appendChild(newInput);
+          newInput.classList.add('bg-transparent', 'outline', 'outline-1', 'p-1', 'outline-white/45', 'font-p')
         }
 
       const emptyInputs = Array.from(allInputs).filter((input) => input.value.trim() === "");

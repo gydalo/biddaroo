@@ -588,6 +588,10 @@ video {
   }
 }
 
+.relative {
+  position: relative;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -596,6 +600,14 @@ video {
 .my-24 {
   margin-top: 6rem;
   margin-bottom: 6rem;
+}
+
+.mb-12 {
+  margin-bottom: 2rem;
+}
+
+.mb-32 {
+  margin-bottom: 8rem;
 }
 
 .mt-20 {
@@ -608,30 +620,6 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-20 {
-  margin-bottom: 5rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
-}
-
-.mt-12 {
-  margin-top: 2rem;
-}
-
-.mb-12 {
-  margin-bottom: 2rem;
-}
-
-.mb-32 {
-  margin-bottom: 8rem;
 }
 
 .mt-24 {
@@ -658,8 +646,16 @@ video {
   height: 5rem;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
 .h-64 {
   height: 16rem;
+}
+
+.h-80 {
+  height: 20rem;
 }
 
 .h-\[40rem\] {
@@ -668,10 +664,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .min-h-screen {
@@ -686,6 +678,10 @@ video {
   width: 5rem;
 }
 
+.w-48 {
+  width: 12rem;
+}
+
 .w-\[40rem\] {
   width: 40rem;
 }
@@ -696,10 +692,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.min-w-\[150px\] {
-  min-width: 150px;
 }
 
 .max-w-md {
@@ -742,10 +734,6 @@ video {
   flex-wrap: wrap;
 }
 
-.flex-nowrap {
-  flex-wrap: nowrap;
-}
-
 .items-start {
   align-items: flex-start;
 }
@@ -774,16 +762,16 @@ video {
   gap: 2.5rem;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
-.gap-12 {
-  gap: 2rem;
-}
-
 .gap-16 {
   gap: 4rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -935,6 +923,10 @@ video {
   font-size: 0.7rem;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 .leading-relaxed {
   line-height: 1.625;
 }
@@ -981,16 +973,6 @@ video {
   text-underline-offset: 4px;
 }
 
-@media (min-width: 640px) {
-  .sm\:basis-1 {
-    flex-basis: 0.25rem;
-  }
-
-  .sm\:basis-1\/2 {
-    flex-basis: 50%;
-  }
-}
-
 @media (min-width: 768px) {
   .md\:m-20 {
     margin: 5rem;
@@ -1010,20 +992,6 @@ video {
 
   .md\:flex-row {
     flex-direction: row;
-  }
-
-  .md\:flex-nowrap {
-    flex-wrap: nowrap;
-  }
-
-  .md\:justify-center {
-    justify-content: center;
-  }
-
-  .md\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(1rem * var(--tw-space-x-reverse));
-    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .md\:p-6 {
