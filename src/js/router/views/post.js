@@ -47,6 +47,7 @@ function renderTitle(postData) {
 
 function renderCreateEndsAt(postData) {
   const renderCreateEndsAt = document.getElementById("renderCreateEndsAt")
+  renderCreateEndsAt.classList.add('flex', 'justify-between', 'mt-4')
 
   if (!renderCreateEndsAt) {
     console.error("Post container not found");
@@ -84,7 +85,7 @@ function renderPostData(postData) {
 
   const sellerName = document.createElement("p");
   sellerName.textContent = `Auctioned by ${postData.seller?.name}`;
-  sellerName.classList.add("font-p", "text-xs")
+  sellerName.classList.add("font-p", "text-xs", 'mt-4')
 
   postContainer.appendChild(auctionDescription);
   postContainer.appendChild(sellerName);
@@ -150,7 +151,7 @@ function renderBidInput(postData) {
   }
 
   const bidForm = document.createElement("form");
-  bidForm.classList.add('items-center')
+  bidForm.classList.add('align-center')
 
   const bidInput = document.createElement("input");
   bidInput.type = "number";
