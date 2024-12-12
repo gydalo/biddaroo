@@ -42,7 +42,7 @@ function renderProfilePage(data) {
   
 
   const profileInfoSection = document.createElement("div");
-  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16");
+  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16", "mt-20", "mb-32");
 
   const bioCreditsSection = document.createElement("div");
   bioCreditsSection.classList.add("bio-credits-section", "self-center");
@@ -62,7 +62,7 @@ function renderProfilePage(data) {
 
   const nameElement = document.createElement("h3");
   nameElement.textContent = data.name || "No name provided";
-  nameElement.classList.add("font-h2");
+  nameElement.classList.add("font-h2", "text-lg", "mb-12");
   nameAvatarSection.appendChild(nameElement);
 
   if (data.avatar?.url) {
@@ -101,17 +101,17 @@ function renderProfilePage(data) {
 
 
   const listingsWinsSection = document.createElement("div");
-  listingsWinsSection.classList.add("listings-wins-section", "flex", "justify-center");
+  listingsWinsSection.classList.add("flex", "flex-col", "justify-center", "md:flex-row", "gap-4", "items-center", "h-screen");
 
 
   const listings = data.listings || (data._count?.listings || []);
   const listingsSection = document.createElement("div");
-  listingsSection.classList.add("listings-section", "basis-1/3", "justify-center");
+  listingsSection.classList.add("listings-section", "md:basis-1/3", "justify-center", "md:flex-row", "max-w-sm");
 
   if (listings.length > 0) {
     const listingsTitle = document.createElement("h2");
     listingsTitle.textContent = "Listings";
-    listingsTitle.classList.add("font-h2");
+    listingsTitle.classList.add("font-h2", "text-lg");
     listingsSection.appendChild(listingsTitle);
 
     listings.forEach(listing => {
@@ -137,12 +137,12 @@ function renderProfilePage(data) {
 
   const wins = data.wins || (data._count?.wins || []);
   const winsSection = document.createElement("div");
-  winsSection.classList.add("wins-section", "basis-1/3");
+  winsSection.classList.add("wins-section", "md:basis-1/3", "md:flex-row", "max-w-sm");
 
   if (wins.length > 0) {
     const winsTitle = document.createElement("h2");
     winsTitle.textContent = "Wins";
-    winsTitle.classList.add("font-h2");
+    winsTitle.classList.add("font-h2", "text-lg");
     winsSection.appendChild(winsTitle);
 
     wins.forEach(win => {
