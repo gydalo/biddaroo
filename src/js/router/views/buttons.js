@@ -45,7 +45,6 @@ async function handleBidPlacement() {
         }
 
         const result = await placeBid(listingId, bidAmount);
-        alert("Bid placed successfully!");
         console.log("Bid result:", result);
         location.reload()
       } catch (error) {
@@ -76,7 +75,6 @@ function logOut() {
       button.addEventListener("click", () => {
         localStorage.clear();
 
-        alert("You are now logged out");
         location.reload();
       });
 
@@ -120,7 +118,7 @@ async function renderEditProfileButton() {
         if (loggedInUser) {
           const button = document.createElement("button");
           button.innerText = "Edit Profile";
-          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover")
           button.addEventListener("click", () => {
             window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`;
           });
@@ -142,7 +140,7 @@ function renderCreateButton() {
     if (container) {
       const button = document.createElement("button");
       button.innerText = "Create Listing";
-      button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
+      button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover")
       button.addEventListener("click", () => {
         // Change to /Biddaroo/ for github version
         window.location.href = `/biddaroo/post/create/index.html`;
@@ -173,7 +171,7 @@ async function renderRemoveButton() {
           const button = document.createElement("button");
           button.innerText = "Delete Post";
 
-          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover")
 
           button.addEventListener("click", () => {
             postMethods.removePost(id);
@@ -207,7 +205,7 @@ async function renderEditButton() {
         if (post.seller && post.seller.name === loggedInUser) {
           const button = document.createElement("button");
           button.innerText = "Edit Post";
-          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3")
+          button.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover")
           button.addEventListener("click", () => {
             window.location.href = `/biddaroo/post/edit/index.html?id=${id}`;
           });
@@ -222,44 +220,3 @@ async function renderEditButton() {
 
 renderEditButton();
 
-/*
-
-function loginButtonNotLoggedIn() {
-    if (isLoggedIn()) {
-    } else {
-        const container = document.querySelector("#notLoggedIn");
-
-        if (container) { 
-            const buttonLogin = document.createElement("button");
-            buttonLogin.innerText = "Login";
-            buttonLogin.addEventListener("click", () => {
-                window.location.href = `/auth/login.html`;
-
-            });
-            container.appendChild(buttonLogin);
-        }
-        
-}
-}
-
-loginButtonNotLoggedIn();
-
-function registerButtonNotLoggedIn() {
-    if (isLoggedIn()) {
-    } else {
-        const container = document.querySelector("#notLoggedIn");
-
-        if (container) { 
-            const buttonRegister = document.createElement("button");
-            buttonRegister.innerText = "Register";
-            buttonRegister.addEventListener("click", () => {
-                window.location.href = `/auth/register.html`;
-
-            });
-            container.appendChild(buttonRegister);
-        }
-        
-}
-}
-
-registerButtonNotLoggedIn(); */

@@ -47,7 +47,7 @@ function renderTitle(postData) {
 
 function renderCreateEndsAt(postData) {
   const renderCreateEndsAt = document.getElementById("renderCreateEndsAt")
-  renderCreateEndsAt.classList.add('flex', 'justify-between', 'mt-4')
+  renderCreateEndsAt.classList.add('flex', 'justify-between', 'mt-4', 'gap-4')
 
   if (!renderCreateEndsAt) {
     console.error("Post container not found");
@@ -147,6 +147,7 @@ function renderBidInput(postData) {
 
   if (loggedInUser === sellerName) {
     bidContainer.innerHTML = "<p>You cannot bid on your own auction.</p>";
+    bidContainer.classList.add('font-p', 'text-xs')
     return;
   }
 
@@ -163,7 +164,7 @@ function renderBidInput(postData) {
   const bidButton = document.createElement("button");
   bidButton.type = "submit";
   bidButton.textContent = "Place Bid";
-  bidButton.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "mt-4")
+  bidButton.classList.add("p-2", "font-h2", "text-center", "bg-button", "py-1", "px-3", "mt-20", "hover:bg-hover")
 
   bidForm.appendChild(bidInput);
   bidForm.appendChild(bidButton);

@@ -42,7 +42,8 @@ function renderProfilePage(data) {
   
 
   const profileInfoSection = document.createElement("div");
-  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16", "mt-20", "mb-32");
+  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16", "mt-20", "mb-32", "flex-wrap", "md:flex-nowrap" 
+  );
 
   const bioCreditsSection = document.createElement("div");
   bioCreditsSection.classList.add("bio-credits-section", "self-center");

@@ -8,7 +8,7 @@ function createImageCarouselItem(mediaItem, isActive = false) {
     const img = document.createElement('img');
     img.src = mediaItem?.url; 
     img.alt = mediaItem?.alt || 'Auction image'; 
-    img.classList.add('w-auto', 'h-full', 'object-contain');
+    img.classList.add('w-auto', 'h-full', 'object-contain', 'mx-auto');
 
     li.appendChild(img);
     return li;

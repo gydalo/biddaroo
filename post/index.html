@@ -27,12 +27,12 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-8 max-w-screen-lg w-full">
         <div
           data-carousel
-          class="flex flex-col justify-center items-center w-full mx-auto">
+          class="flex flex-col justify-center items-center w-full mx-auto relative">
           <ul
             data-slides
-            class="w-full flex justify-center items-center overflow-hidden space-x-4 h-64 md:h-80"></ul>
+            class="w-full flex justify-center items-center overflow-hidden h-64 md:h-80"></ul>
 
-          <div class="flex justify-center space-x-4">
+          <div class="absolute inset-0 flex justify-between items-center">
             <button
               class="carousel-button prev text-white text-2xl p-3"
               data-carousel-button="prev">
@@ -59,11 +59,14 @@
           </div>
           <div id="bid-container" class="flex justify-center items-center"></div>
         </div>
+        <div class="flex justify-center gap-4 mt-20">
         <div id="editButton"></div>
         <div id="deleteButton"></div>
+      </div>
         </div>
           </div>
         </div>
       </div>
+      <footer></footer>
   </body>
 </html>

@@ -160,7 +160,13 @@ export function postTemplate(postData) {
     const postImage = document.createElement("img");
     postImage.setAttribute("src", postData.media[0].url);
     postImage.alt = `Image from ${postData.title}`;
-    postImage.classList.add("w-[40rem]", "h-[40rem]", "object-cover");
+    postImage.classList.add("w-[40rem]", "h-[30rem]", "object-cover");
+
+    postImage.onerror = function () {
+      console.warn(`Image failed to load: ${postData.media[0].url}`);
+      postImage.remove();
+    };
+
     post.appendChild(postImage);
   }
 
