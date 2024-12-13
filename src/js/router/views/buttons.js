@@ -75,7 +75,7 @@ function logOut() {
       button.addEventListener("click", () => {
         localStorage.clear();
 
-        location.reload();
+        window.location.href = '/biddaroo/index.html';
       });
 
       container.appendChild(button);
