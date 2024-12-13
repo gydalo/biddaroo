@@ -29,8 +29,8 @@
     </div>
     </header>
     <main>
-      <div class="flex flex-col items-center mt-24">
-        <div class="mt-4">
+      <div class="flex items-center justify-center gap-32 mt-24 flex-wrap md:flex-nowrap">
+        <div class="mt-4 md:basis-1/3">
           <div class="mb-4">
             <h1 class="font-heading text-xl">Biddaroo</h1>
           </div>
@@ -38,21 +38,21 @@
     <div class="mt-4">
     <form id="createListing" name="createListing" class="space-y-4">
         <div>
-        <input type="text" name="title" placeholder="Title" required maxlength="100" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
+        <input type="text" name="title" placeholder="Title" required maxlength="100" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p min-w-72 max-w-96">
     </div>
     <div>
       <div id="media-container">
-        <input type="url" name="mediaURL" placeholder="Image URL" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
+        <input type="url" name="mediaURL" placeholder="Image URL" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p min-w-72 max-w-96">
       </div>
     </div>
     <div>
-      <input type="text" name="mediaALT" placeholder="Image Alt Text" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
+      <input type="text" name="mediaALT" placeholder="Image Alt Text" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p min-w-72 max-w-96">
   </div>
     <div>
-        <input type="datetime-local" name="endsAt" placeholder="Date for Auction end" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
+        <input type="datetime-local" name="endsAt" placeholder="Date for Auction end" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p min-w-72 max-w-96">
     </div>
         <div>
-        <textarea type="text" name="description" placeholder="Blog post text..." required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full"></textarea> </textarea>
+        <textarea type="text" name="description" placeholder="Blog post text..." required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p h-32 min-w-72 max-w-96"></textarea> </textarea>
     </div>
     <div class="text-center">
       <button type="submit" class="font-h2 text-center bg-button py-1 px-3 hover:bg-hover">Post</button>
@@ -60,6 +60,9 @@
       </div>
     </div>
 </form>
+<div id="auctionContainer" class="md:basis-1/3 flex flex-col items-center justify-center text-center gap-16">
+  <h2 class="font-h2">Auctions you might like...</h2>
+</div>
 </main>
   <footer>
     Copyright
