@@ -7,7 +7,8 @@ export default {
       background: '#262626',
       button: '#3E4435',
       header: '#606060',
-      'white': '#FFFFFF'
+      'white': '#FFFFFF',
+      hover: '#31372B'
     },
     extend: {
       fontFamily: {
@@ -30,8 +31,11 @@ export default {
         massive: "5rem", // Extra-large font size for hero sections (80px)
       },
       spacing: {
+        '12': '2rem', 
+        '14': '3rem', 
         '16': '4rem',      // Slightly larger than 15
         '20': '5rem',      // Common size
+        '22': '5.25rem',      // Common size
         '24': '6rem',      // Common size
         '32': '8rem',      // Larger step
         '40': '10rem',     // Larger step

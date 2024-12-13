@@ -32,14 +32,21 @@ if (form) {
 
             mediaContainer.innerHTML = "";
 
+            const inputSection = document.createElement('div');
+            inputSection.classList.add('flex', 'flex-col', 'space-y-4')
+
             if (post.media && Array.isArray(post.media) && post.media.length > 0) {
                 post.media.forEach((mediaItem, index) => {
+
                     const mediaInput = document.createElement("input");
                     mediaInput.type = "url";
                     mediaInput.name = "mediaURL";
                     mediaInput.placeholder = "Image URL";
                     mediaInput.value = mediaItem.url || "";
                     mediaContainer.appendChild(mediaInput);
+                    mediaInput.classList.add('bg-transparent', 'outline', 'outline-1', 'p-1', 'outline-white/45', 'font-p')
+
+                    inputSection.appendChild(mediaInput);
                   });
                 }
             
@@ -48,6 +55,12 @@ if (form) {
                 emptyInput.name = "mediaURL";
                 emptyInput.placeholder = "Image URL";
                 mediaContainer.appendChild(emptyInput);
+                emptyInput.classList.add('bg-transparent', 'outline', 'outline-1', 'p-1', 'outline-white/45', 'font-p')
+
+                inputSection.appendChild(emptyInput);
+
+                mediaContainer.appendChild(inputSection);
+                mediaContainer.classList.add('flex', 'flex-col', 'space-y-4')
 
         } catch (error) {
             console.error("Failed to fetch post data:", error);

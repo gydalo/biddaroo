@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const formLogin = document.getElementById("loginForm");
   const formCreateAcc = document.getElementById("registerForm");
   const loggedOutHeading = document.getElementById("loggedOutHeading");
+  const outlineForm = document.getElementById("outlineForm");
 
   const loggedInProfileButton = document.getElementById(
     "loggedInProfileButton"
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     hide(formLogin);
     hide(formCreateAcc);
     hide(loggedOutHeading);
+    hide(outlineForm);
 
     show(loggedInProfileButton);
     show(loggedInCreateButton);
@@ -158,7 +160,13 @@ export function postTemplate(postData) {
     const postImage = document.createElement("img");
     postImage.setAttribute("src", postData.media[0].url);
     postImage.alt = `Image from ${postData.title}`;
-    postImage.classList.add("w-[40rem]", "h-[40rem]", "object-cover");
+    postImage.classList.add("w-[40rem]", "h-[30rem]", "object-cover");
+
+    postImage.onerror = function () {
+      console.warn(`Image failed to load: ${postData.media[0].url}`);
+      postImage.remove();
+    };
+
     post.appendChild(postImage);
   }
 
@@ -194,7 +202,7 @@ export function postTemplate(postData) {
 
   const bidButton = document.createElement("button");
   bidButton.textContent = "BID";
-  bidButton.classList.add("font-h2", "text-center", "bg-button", "py-1", "px-3");
+  bidButton.classList.add("font-h2", "text-center", "bg-button", "py-1", "px-3", "hover:bg-hover");
 
   post.append(bidButton);
   bidButton.addEventListener("click", () => {

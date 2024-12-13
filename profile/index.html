@@ -1,13 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
     <script type="module" src="../src/app.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/css/style.css" />
     <title>Document</title>
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/03b5ffc1d7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Ysabeau+SC:wght@1..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<body class="bg-background text-white">
+  <header class="bg-header px-4 w-full">
+    <div class="flex space-x-4 items-center text-sm justify-between">
+      <div>
+    <div><a href="/biddaroo/index.html"><img class="w-14" src="./images/logo-removebg-preview.png" alt="Logo"></a></div>
+  </div>
+  <div class="flex items-end gap-4">
+    <div id="loggedInProfileButton" class="form--hidden"></div>
+    <div id="logOutButton" class="mr-4"></div>
+  </div>
+    </div>
+  </header>
     <div id="profile-container"></div>
+    <div class="flex justify-center my-24">
     <div id="editProfileButton"></div>
+</div>
 </body>
 </html>

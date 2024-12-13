@@ -1,6 +1,6 @@
 function createImageCarouselItem(mediaItem, isActive = false) {
     const li = document.createElement('li');
-    li.classList.add('slide');
+    li.classList.add('slide', 'w-full', 'flex', 'justify-center', 'items-center', 'flex-shrink-0');
     if (isActive) {
         li.dataset.active = true;
     }
@@ -8,9 +8,9 @@ function createImageCarouselItem(mediaItem, isActive = false) {
     const img = document.createElement('img');
     img.src = mediaItem?.url; 
     img.alt = mediaItem?.alt || 'Auction image'; 
+    img.classList.add('w-auto', 'h-full', 'object-contain', 'mx-auto');
 
     li.appendChild(img);
-
     return li;
 }
 

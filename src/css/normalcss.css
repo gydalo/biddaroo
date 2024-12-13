@@ -11,7 +11,7 @@ input {
   display: block;
 }
 
-
+/*
 .carousel {
   position: relative;
   width: 100%;
@@ -19,6 +19,14 @@ input {
   margin: auto;
   overflow: hidden;
 }
+  */
+
+  .carousel {
+    position: relative;
+    max-width: 100%; 
+    margin: 0; 
+    overflow: hidden;
+  }
 
 [data-slides] {
   display: flex;

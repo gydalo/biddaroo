@@ -4,37 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../src/css/style.css" />
     <script type="module" src="../../src/app.js"></script>
+    <script
+    src="https://kit.fontawesome.com/03b5ffc1d7.js"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Ysabeau+SC:wght@1..1000&display=swap"
+    rel="stylesheet">
 </head>
-<body>
-    <header>
-      <a href="/biddaroo/profile/index.html">My Profile</a>
-      <div id="logOutButton"></div>
+<body class="bg-background text-white">
+  <header class="bg-header">
+    <div class="flex space-x-4 items-center text-sm">
+      <div>
+    <div><a href="/biddaroo/index.html"><img class="w-10" src="/images/logo-removebg-preview.png" alt="Logo"></a></div>
+  </div>
+  <div class="flex items-end">
+    <a href="/biddaroo/profile/index.html">My Profile</a>
+    <div id="logOutButton"></div>
+  </div>
+    </div>
     </header>
     <main>
-    <h1>Biddaroo</h1>
-    <h2>New Listing</h2>
-    <div>
-    <form id="createListing" name="createListing">
+      <div class="flex flex-col items-center mt-24">
+        <div class="mt-4">
+          <div class="mb-4">
+            <h1 class="font-heading text-xl">Biddaroo</h1>
+          </div>
+          <h2 class="font-h2">Create Listing</h2>
+    <div class="mt-4">
+    <form id="createListing" name="createListing" class="space-y-4">
         <div>
-        <input type="text" name="title" placeholder="Title" required maxlength="100">
+        <input type="text" name="title" placeholder="Title" required maxlength="100" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
     </div>
     <div>
-      <label for="media-container">Images:</label>
       <div id="media-container">
-        <input type="url" name="mediaURL" placeholder="Image URL" required>
+        <input type="url" name="mediaURL" placeholder="Image URL" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
       </div>
     </div>
     <div>
-      <input type="text" name="mediaALT" placeholder="Image Alt Text">
+      <input type="text" name="mediaALT" placeholder="Image Alt Text" class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
   </div>
     <div>
-        <input type="datetime-local" name="endsAt" placeholder="Date for Auction end" required>
+        <input type="datetime-local" name="endsAt" placeholder="Date for Auction end" required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full">
     </div>
         <div>
-        <textarea type="text" name="description" placeholder="Blog post text..." required> </textarea>
+        <textarea type="text" name="description" placeholder="Blog post text..." required class="bg-transparent outline outline-1 p-1 outline-white/45 font-p w-full"></textarea> </textarea>
     </div>
-      <button type="submit">Post</button>
+    <div class="text-center">
+      <button type="submit" class="font-h2 text-center bg-button py-1 px-3 hover:bg-hover">Post</button>
+      </div>
+      </div>
     </div>
 </form>
 </main>
