@@ -1,28 +1,22 @@
 export async function deletePost(id) {}
 
-import { API_AUCTION_LISTINGS } from "../constants.js";
-import { authFetch } from "../auth/key.js";
+import { API_AUCTION_LISTINGS } from '../constants.js'
+import { authFetch } from '../auth/key.js'
 
-
-const method = "delete";
+const method = 'delete'
 
 export async function removePost(id) {
-    if (!id){
-        throw new Error("Delete requires a post ID");
+    if (!id) {
+        throw new Error('Delete requires a post ID')
     }
-    
-    const deletePostURL = `${API_AUCTION_LISTINGS}/${id}`;
+
+    const deletePostURL = `${API_AUCTION_LISTINGS}/${id}`
 
     const response = await authFetch(deletePostURL, {
-        method
+        method,
     })
 
-    
-    alert("You have deleted the post");
+    alert('You have deleted the post')
 
-    window.location.href = "/biddaroo/index.html";
-
-
+    window.location.href = '/biddaroo/index.html'
 }
-
-
