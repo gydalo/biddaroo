@@ -1,25 +1,32 @@
-import { authFetch } from "../../api/auth/key";
-import { API_SOCIAL_PROFILES } from "../../api/constants";
+import { authFetch } from '../../api/auth/key.js'
+import { API_AUCTION_PROFILES } from '../../api/constants.js'
 
 export async function getProfiles() {
-    const updateProfileURL = `${API_SOCIAL_URL}`;
-    
+    const updateProfileURL = `${API_AUCTION_PROFILES}?_listings=true&_wins=true&_count=true`
+
     const response = await authFetch(updateProfileURL)
-  
-    return await response.json();
-  }
-  
 
-  export async function getProfile(name) {
+    return await response.json()
+}
+
+export async function getProfile(name) {
     if (!name) {
-      throw new Error("Get requires a name");
+        throw new Error('Get requires a name')
     }
-  
-    const getProfileURL = `${API_SOCIAL_PROFILES}$/${name}`;
-    
-    const response = await authFetch(getProfileURL)
-  
-    return await response.json();
-  }
 
-console.log('hei')
+    const getProfileURL = `${API_AUCTION_PROFILES}/${name}?_listings=true&_wins=true&_count=true`
+
+    const response = await authFetch(getProfileURL)
+
+    if (!response.ok) {
+        console.error(
+            'Failed to fetch profile:',
+            response.status,
+            response.statusText
+        )
+        throw new Error('Failed to fetch profile')
+    }
+
+    const profile = await response.json()
+    return profile
+}

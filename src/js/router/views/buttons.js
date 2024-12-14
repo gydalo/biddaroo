@@ -1,160 +1,263 @@
-import { isLoggedIn } from "../../api/auth/key.js";
-/*
-import { getPostIdFromUrl } from "/src/js/router/views/post.js";
-import * as postMethods from "/src/js/api/post/index.js"; */
+import { isLoggedIn, load } from '../../api/auth/key.js'
+import { getPost } from '../../api/post/read.js'
+import { getPostIdFromUrl } from '../views/post.js'
+import * as postMethods from '../../api/post/index.js'
+import { placeBid, fetchUserProfile } from '../views/bid.js'
+
+async function handleBidPlacement() {
+    const currentUrl = window.location.pathname
+    const postId = getPostIdFromUrl()
+
+    const expectedUrl = `/biddaroo/post/index.html`
+
+    if (currentUrl === expectedUrl && postId) {
+        console.log('On the correct bid page. Initializing bid placement...')
+        document
+            .getElementById('place-bid-button')
+            .addEventListener('click', async () => {
+                const bidAmountInput = document.getElementById('bid-amount')
+                const bidAmount = parseFloat(bidAmountInput.value)
+
+                if (isNaN(bidAmount) || bidAmount <= 0) {
+                    alert('Please enter a valid bid amount.')
+                    return
+                }
+
+                const listingId = getPostIdFromUrl()
+
+                try {
+                    const userProfile = await fetchUserProfile()
+                    console.log('Fetched user profile:', userProfile)
+
+                    if (!userProfile) {
+                        alert(
+                            'Failed to retrieve user profile. Please log in again.'
+                        )
+                        return
+                    }
+
+                    const userCredits = userProfile.credits
+
+                    if (bidAmount > userCredits) {
+                        alert(
+                            `You do not have enough credits to place this bid. Available credits: ${userCredits}`
+                        )
+                        return
+                    }
+
+                    const result = await placeBid(listingId, bidAmount)
+                    console.log('Bid result:', result)
+                    location.reload()
+                } catch (error) {
+                    alert('Failed to place bid. Please try again.')
+                    console.error('Bid error:', error)
+                }
+            })
+    }
+}
+
+document.addEventListener('DOMContentLoaded', handleBidPlacement)
+
+handleBidPlacement()
+
+function getLoggedInUserName() {
+    const profileData = load('profile')
+    return profileData?.data?.name || profileData?.name || null
+}
 
 function logOut() {
     if (isLoggedIn()) {
-        const container = document.querySelector("#logOutButton");
+        const container = document.querySelector('#logOutButton')
 
-    if (container) {
-        const button = document.createElement("button");
-        button.innerText = "Logout";
-        button.addEventListener("click", () => {
-            localStorage.clear();
+        if (container) {
+            const button = document.createElement('button')
+            button.innerText = 'Logout'
+            button.classList.add(
+                'hover:underline',
+                'hover:underline-offset-4',
+                'hover:decoration-1'
+            )
+            button.addEventListener('click', () => {
+                localStorage.clear()
 
-            alert("You are now logged out");
-            location.reload()
-        });
+                window.location.href = '/biddaroo/index.html'
+            })
 
-        container.appendChild(button);
+            container.appendChild(button)
+        }
     }
 }
+
+logOut()
+
+function renderProfileButton() {
+    if (isLoggedIn()) {
+        const container = document.querySelector('#loggedInProfileButton')
+
+        if (container) {
+            const button = document.createElement('button')
+            button.innerText = 'Profile'
+            button.classList.add(
+                'hover:underline',
+                'hover:underline-offset-4',
+                'hover:decoration-1'
+            )
+            button.addEventListener('click', () => {
+                // Change to /Biddaroo/ for github version
+                window.location.href = `/biddaroo/profile/index.html`
+            })
+
+            container.appendChild(button)
+        }
+    }
 }
 
+renderProfileButton()
 
-logOut();
+async function renderEditProfileButton() {
+    if (
+        window.location.pathname === '/profile/index.html' ||
+        ('/biddaroo/profile/index.html' && isLoggedIn())
+    ) {
+        const container = document.querySelector('#editProfileButton')
 
-/*
+        if (container) {
+            try {
+                const loggedInUser = getLoggedInUserName()
+
+                if (loggedInUser) {
+                    const button = document.createElement('button')
+                    button.innerText = 'Edit Profile'
+                    button.classList.add(
+                        'p-2',
+                        'font-h2',
+                        'text-center',
+                        'bg-button',
+                        'py-1',
+                        'px-3',
+                        'hover:bg-hover'
+                    )
+                    button.addEventListener('click', () => {
+                        window.location.href = `/biddaroo/profile/edit/index.html?name=${loggedInUser}`
+                    })
+                    container.appendChild(button)
+                }
+            } catch (error) {
+                console.error('Failed to render edit button:', error)
+            }
+        }
+    }
+}
+
+renderEditProfileButton()
 
 function renderCreateButton() {
     if (isLoggedIn()) {
-        const container = document.querySelector("#createButton");
+        const container = document.querySelector('#loggedInCreateButton')
 
-        if (container) { 
-            const button = document.createElement("button");
-            button.innerText = "Create new Post";
+        if (container) {
+            const button = document.createElement('button')
+            button.innerText = 'Create Listing'
             button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
+                'p-2',
+                'font-h2',
+                'text-center',
+                'bg-button',
+                'py-1',
+                'px-3',
+                'hover:bg-hover'
             )
-            button.addEventListener("click", () => {
-                window.location.href = `/post/create/index.html`;
-            });
-            
-            container.appendChild(button);
+            button.addEventListener('click', () => {
+                // Change to /Biddaroo/ for github version
+                window.location.href = `/biddaroo/post/create/index.html`
+            })
+
+            container.appendChild(button)
         }
     }
 }
 
-renderCreateButton();
+renderCreateButton()
 
+async function renderRemoveButton() {
+    if (
+        window.location.pathname === '/post/index.html' ||
+        ('/biddaroo/post/index.html' && isLoggedIn())
+    ) {
+        const container = document.querySelector('#deleteButton')
+        const id = getPostIdFromUrl()
 
-function renderRemoveButton() {
-    if (window.location.pathname === "/post/index.html" && isLoggedIn()) {
-        const container = document.querySelector("#deleteButton");
-        const id = getPostIdFromUrl(); 
+        if ((container, id)) {
+            try {
+                const post = await getPost(id)
 
-        if (container, id) { 
-            const button = document.createElement("button");
-            button.innerText = "Delete Post";
-            button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
-            )
-            button.addEventListener("click", () => {
-                postMethods.removePost(id);
-            });
+                const loggedInUser = getLoggedInUserName()
 
-            container.appendChild(button);
+                if (post.seller && post.seller.name === loggedInUser) {
+                    const button = document.createElement('button')
+                    button.innerText = 'Delete Post'
 
-        } else {
-            if (!container) {
-                console.error("No container found with the selector #deleteButton");
+                    button.classList.add(
+                        'p-2',
+                        'font-h2',
+                        'text-center',
+                        'bg-button',
+                        'py-1',
+                        'px-3',
+                        'hover:bg-hover'
+                    )
+
+                    button.addEventListener('click', () => {
+                        postMethods.removePost(id)
+                    })
+
+                    container.appendChild(button)
+                }
+            } catch (error) {
+                console.error('Failed to render edit button:', error)
             }
-            if (!id) {
-                console.error("No post ID found in URL");
+        }
+    }
+}
+
+renderRemoveButton()
+
+async function renderEditButton() {
+    if (
+        window.location.pathname === '/post/index.html' ||
+        ('/biddaroo/post/index.html' && isLoggedIn())
+    ) {
+        const container = document.querySelector('#editButton')
+        const id = getPostIdFromUrl()
+
+        if (container && id) {
+            try {
+                const post = await getPost(id)
+
+                const loggedInUser = getLoggedInUserName()
+
+                if (post.seller && post.seller.name === loggedInUser) {
+                    const button = document.createElement('button')
+                    button.innerText = 'Edit Post'
+                    button.classList.add(
+                        'p-2',
+                        'font-h2',
+                        'text-center',
+                        'bg-button',
+                        'py-1',
+                        'px-3',
+                        'hover:bg-hover'
+                    )
+                    button.addEventListener('click', () => {
+                        window.location.href = `/biddaroo/post/edit/index.html?id=${id}`
+                    })
+                    container.appendChild(button)
+                }
+            } catch (error) {
+                console.error('Failed to render edit button:', error)
             }
         }
     }
 }
 
-renderRemoveButton(); 
-
-function renderEditButton() {
-    if (window.location.pathname === "/post/index.html" && isLoggedIn()) {
-        const container = document.querySelector("#editButton");
-        const id = getPostIdFromUrl(); 
-
-        if (container, id) { 
-            const button = document.createElement("button");
-            button.innerText = "Edit Post";
-            button.classList.add(
-                "py-2",
-                "px-4",
-                "bg-button",
-                "rounded",
-                "font-button",
-                "hover:bg-buttonHover"
-            )
-            button.addEventListener("click", () => {
-                window.location.href = `/post/edit/index.html?id=${id}`;
-            });
-            container.appendChild(button);
-        }
-    }
-}
-
-
-renderEditButton(); 
-
-
-function loginButtonNotLoggedIn() {
-    if (isLoggedIn()) {
-    } else {
-        const container = document.querySelector("#notLoggedIn");
-
-        if (container) { 
-            const buttonLogin = document.createElement("button");
-            buttonLogin.innerText = "Login";
-            buttonLogin.addEventListener("click", () => {
-                window.location.href = `/auth/login.html`;
-
-            });
-            container.appendChild(buttonLogin);
-        }
-        
-}
-}
-
-loginButtonNotLoggedIn();
-
-function registerButtonNotLoggedIn() {
-    if (isLoggedIn()) {
-    } else {
-        const container = document.querySelector("#notLoggedIn");
-
-        if (container) { 
-            const buttonRegister = document.createElement("button");
-            buttonRegister.innerText = "Register";
-            buttonRegister.addEventListener("click", () => {
-                window.location.href = `/auth/register.html`;
-
-            });
-            container.appendChild(buttonRegister);
-        }
-        
-}
-}
-
-registerButtonNotLoggedIn(); */
-
-
+renderEditButton()

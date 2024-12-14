@@ -1,5 +1,3 @@
-//import "/src/css/style.css";
+import router from './js/router/index.js'
 
-import router from "./js/router/index.js";
-
-await router(window.location.pathname);
+await router(window.location.pathname)

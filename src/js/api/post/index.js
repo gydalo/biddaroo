@@ -1,8 +1,4 @@
-export * from "/src/js/api/post/create.js"
-export * from "/src/js/api/post/read.js"
-export * from "/src/js/api/post/update.js"
-export * from "/src/js/api/post/delete.js"
-
-
-
-
+export * from './create.js'
+export * from './read.js'
+export * from './update.js'
+export * from './delete.js'

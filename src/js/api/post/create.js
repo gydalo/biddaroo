@@ -1,28 +1,20 @@
-//export async function createPost({ title, body, tags, media }) {}
+import { API_AUCTION_LISTINGS } from '../constants.js'
+import { authFetch } from '../auth/key.js'
 
-
-/*import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
-import { authFetch } from "/src/js/api/auth/key.js";
-
-
-const method = "POST";
+const method = 'POST'
 
 export async function createPost(postData) {
-    const createPostURL = API_SOCIAL_POSTS;
+    const createListingURL = API_AUCTION_LISTINGS
 
-    const response = await authFetch(createPostURL, {
+    const response = await authFetch(createListingURL, {
         method,
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
     })
-    
+
     if (response.ok) {
-        alert("Post created successfully!");
-       window.location.href = "/index.html";
+        window.location.href = '/biddaroo/index.html'
     } else {
-        alert("Failed to create the post");
+        alert('Failed to create the listing')
     }
-    return await response.json();
-
-
+    return await response.json()
 }
-*/
