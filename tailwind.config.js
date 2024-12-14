@@ -7,6 +7,7 @@ export default {
       background: '#262626',
       button: '#3E4435',
       header: '#606060',
+      footer: "#191919",
       'white': '#FFFFFF',
       hover: '#31372B'
     },

@@ -20,6 +20,7 @@ if (form && mediaContainer) {
           newInput.name = "mediaURL";
           newInput.placeholder = "Image URL";
           mediaContainer.appendChild(newInput);
+          mediaContainer.classList.add('flex', 'flex-col', 'space-y-4')
           newInput.classList.add('bg-transparent', 'outline', 'outline-1', 'p-1', 'outline-white/45', 'font-p')
         }
 
@@ -66,30 +67,33 @@ async function displayActiveAuctions(auctionContainer) {
   }
   
   try {
-    const posts = await getPosts(1, 2);
+    const posts = await getPosts(1, 10);
 
     if (!posts || !posts.data) {
       console.error("Unexpected posts structure:", posts);
       return;
     }
 
-    const activePosts = posts.data.filter((post) => {
+    const activePostsWithImages = posts.data.filter((post) => {
       const endsAtDate = new Date(post.endsAt);
-      return endsAtDate > new Date();
+      return endsAtDate > new Date() && post.media?.length > 0 && post.media[0]?.url;
     });
 
-    if (activePosts.length === 0) {
-      console.log("No active posts found.");
+    console.log(posts)
+
+    if (activePostsWithImages.length < 2) {
+      console.log("Not enough posts with images found.");
       postContainer.innerHTML = "<p>No active auctions available.</p>";
       return;
     }
 
-    activePosts.forEach((post) => {
+    activePostsWithImages.slice(0, 2).forEach((post) => {
       const postElement = document.createElement("div");
       postElement.classList.add("post");
 
       const title = document.createElement("h2");
       title.textContent = post.title;
+      title.classList.add("font-h2", "cursor-pointer", "mb-4")
       postElement.appendChild(title);
       title.addEventListener("click", () => {
         const targetUrl = `/biddaroo/post/index.html?id=${post.id}`;
@@ -98,18 +102,16 @@ async function displayActiveAuctions(auctionContainer) {
       });
       title.classList.add('font-h2')
 
-      if (post.media?.length > 0) {
         const img = document.createElement("img");
         img.src = post.media[0].url;
         img.alt = `Image of ${post.title}`;
-        img.classList.add('w-80')
+        img.classList.add('w-80', "hover:cursor-pointer","hover:opacity-60")
         postElement.appendChild(img);
         img.addEventListener("click", () => {
           const targetUrl = `/biddaroo/post/index.html?id=${post.id}`;
           window.location.href = targetUrl;
         });
 
-      }
 
       postContainer.appendChild(postElement);
     });

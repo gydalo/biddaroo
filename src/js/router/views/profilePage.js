@@ -42,7 +42,7 @@ function renderProfilePage(data) {
   
 
   const profileInfoSection = document.createElement("div");
-  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16", "mt-20", "mb-32", "flex-wrap", "md:flex-nowrap" 
+  profileInfoSection.classList.add("profile-info-section", "flex", "justify-center", "gap-16", "md:mt-20", "mb-32", "flex-wrap", "md:flex-nowrap" 
   );
 
   const bioCreditsSection = document.createElement("div");
@@ -101,13 +101,18 @@ function renderProfilePage(data) {
   profileContainer.appendChild(profileInfoSection);
 
 
+
+
+
+
+
   const listingsWinsSection = document.createElement("div");
-  listingsWinsSection.classList.add("flex", "flex-col", "justify-center", "md:flex-row", "gap-4", "items-center");
+  listingsWinsSection.classList.add("flex", "flex-wrap", "md:flex-nowrap", "mt-16", "gap-8", "justify-around", "md:justify-evenly");
 
 
   const listings = data.listings || (data._count?.listings || []);
   const listingsSection = document.createElement("div");
-  listingsSection.classList.add("listings-section", "md:basis-1/3", "justify-center", "md:flex-row");
+  listingsSection.classList.add("listings-section", "flex", "flex-col", "gap-4");
 
   if (listings.length > 0) {
     const listingsTitle = document.createElement("h2");
@@ -121,7 +126,7 @@ function renderProfilePage(data) {
 
       const listingTitle = document.createElement("p");
       listingTitle.textContent = listing.title;
-      listingTitle.classList.add("font-p");
+      listingTitle.classList.add("font-p", 'hover:underline', 'hover:underline-offset-4', 'hover:decoration-1', 'cursor-pointer', "break-words", "whitespace-normal", "max-w-40");
       listingContainer.appendChild(listingTitle);
 
       listingContainer.addEventListener("click", () => {
@@ -138,7 +143,7 @@ function renderProfilePage(data) {
 
   const wins = data.wins || (data._count?.wins || []);
   const winsSection = document.createElement("div");
-  winsSection.classList.add("wins-section", "md:basis-1/3", "md:flex-row", "max-w-sm");
+  winsSection.classList.add("wins-section", "flex", "flex-col", "gap-4");
 
   if (wins.length > 0) {
     const winsTitle = document.createElement("h2");
@@ -152,8 +157,10 @@ function renderProfilePage(data) {
 
       const winTitle = document.createElement("p");
       winTitle.textContent = win.title;
-      winTitle.classList.add("font-p");
+      winTitle.classList.add("font-p", 'hover:underline', 'hover:underline-offset-4', 'hover:decoration-1', "cursor-pointer",  "break-words", "whitespace-normal", "max-w-40");
       winContainer.appendChild(winTitle);
+
+      
 
       winContainer.addEventListener("click", () => {
         const targetUrl = `/biddaroo/post/index.html?id=${win.id}`;
