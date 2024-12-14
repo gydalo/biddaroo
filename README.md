@@ -2,7 +2,7 @@
 
 # Biddaroo - Semester Project Fall 2024
 
-![image]()
+![image](https://i.postimg.cc/7bv35KFS/Skjermbilde-2024-12-14-140132.png)
 
 For my semester project, I made an auctionpage for a fake auctionsite called Biddaroo. This auction site allows users to register, login and make your own auctions. 
 
