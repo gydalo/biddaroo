@@ -18,6 +18,7 @@ export async function register(profile) {
     if (!response.ok) {
         alert('An account with this username or email already exists.')
     } else {
+      alert('You are now registered.')
     }
     console.log(result)
 }
