@@ -23,7 +23,6 @@ export async function updateProfile(profileData) {
     console.log('Response from server:', responseData)
 
     if (response.ok) {
-        alert('Profile updated successfully!')
         save('profile', responseData)
     } else {
         alert('Failed to update the profile')

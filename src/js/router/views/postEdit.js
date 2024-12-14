@@ -14,7 +14,6 @@ if (form) {
 
     if (!postId) {
         console.error('Post ID is missing from the URL.')
-        alert('Post ID is missing!')
     }
 
     async function loadPostData() {
@@ -80,7 +79,6 @@ if (form) {
             mediaContainer.classList.add('flex', 'flex-col', 'space-y-4')
         } catch (error) {
             console.error('Failed to fetch post data:', error)
-            alert('Failed to load post data.')
         }
     }
 
