@@ -1,14 +1,12 @@
-
-
 .form--unhidden {
-  display: block;
+    display: block;
 }
 .form--hidden {
-  display: none;
+    display: none;
 }
 label,
 input {
-  display: block;
+    display: block;
 }
 
 /*
@@ -21,24 +19,23 @@ input {
 }
   */
 
-  .carousel {
+.carousel {
     position: relative;
-    max-width: 100%; 
-    margin: 0; 
+    max-width: 100%;
+    margin: 0;
     overflow: hidden;
-  }
+}
 
 [data-slides] {
-  display: flex;
-  list-style: none;
+    display: flex;
+    list-style: none;
 }
 
 .slide {
-  min-width: 100%;
-  display: none; 
+    min-width: 100%;
+    display: none;
 }
 
 .slide[data-active] {
-  display: block; 
+    display: block;
 }
-
