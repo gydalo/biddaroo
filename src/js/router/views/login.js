@@ -1,3 +1,2 @@
-
-import { setLoginFormListener } from "../../ui/auth/login.js";
-setLoginFormListener();
+import { setLoginFormListener } from '../../ui/auth/login.js'
+setLoginFormListener()

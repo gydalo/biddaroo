@@ -1,4 +1,3 @@
+import { profilePage } from './profilePage.js'
 
-import { profilePage } from "./profilePage.js";
-
-profilePage();
+profilePage()
