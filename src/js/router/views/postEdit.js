@@ -161,6 +161,7 @@ async function displayActiveAuctions(auctionContainer) {
 
       const title = document.createElement("h2");
       title.textContent = post.title;
+      title.classList.add("font-h2", "cursor-pointer", "mb-4")
       postElement.appendChild(title);
       title.addEventListener("click", () => {
         const targetUrl = `/biddaroo/post/index.html?id=${post.id}`;
@@ -172,7 +173,7 @@ async function displayActiveAuctions(auctionContainer) {
         const img = document.createElement("img");
         img.src = post.media[0].url;
         img.alt = `Image of ${post.title}`;
-        img.classList.add('w-80')
+        img.classList.add('w-80', "hover:cursor-pointer","hover:opacity-60")
         postElement.appendChild(img);
         img.addEventListener("click", () => {
           const targetUrl = `/biddaroo/post/index.html?id=${post.id}`;

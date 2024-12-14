@@ -72,6 +72,7 @@ function logOut() {
     if (container) {
       const button = document.createElement("button");
       button.innerText = "Logout";
+      button.classList.add('hover:underline', 'hover:underline-offset-4', 'hover:decoration-1')
       button.addEventListener("click", () => {
         localStorage.clear();
 
@@ -92,6 +93,7 @@ function renderProfileButton() {
     if (container) {
       const button = document.createElement("button");
       button.innerText = "Profile";
+      button.classList.add('hover:underline', 'hover:underline-offset-4', 'hover:decoration-1')
       button.addEventListener("click", () => {
         // Change to /Biddaroo/ for github version
         window.location.href = `/biddaroo/profile/index.html`;
