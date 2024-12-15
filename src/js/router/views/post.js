@@ -18,21 +18,29 @@ if (postId) {
                 renderPostData(postData),
                 renderBidderInformation(postData),
                 renderBidInput(postData)
+    
+                const carouselElement = document.querySelector('[data-carousel]');
 
-            if (
-                postData.media &&
-                Array.isArray(postData.media) &&
-                postData.media.length > 0
-            ) {
-                initializeCarousel(postData.media)
-            } else {
-                console.log('No media available for this post.')
-            }
-        })
-        .catch((error) => {
-            console.error('Error fetching post:', error)
-        })
-}
+                if (
+                    postData.media &&
+                    Array.isArray(postData.media) &&
+                    postData.media.length > 0
+                ) {
+                    initializeCarousel(postData.media);
+                    if (carouselElement) {
+                        carouselElement.style.display = 'flex';
+                    }
+                } else {
+                    console.log('No media available for this post.');
+                    if (carouselElement) {
+                        carouselElement.style.display = 'none';
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching post:', error);
+            });
+    }
 
 function renderTitle(postData) {
     const renderTitle = document.getElementById('renderTitle')
@@ -120,7 +128,7 @@ function renderBidderInformation(postData) {
 
     const bidsTitle = document.createElement('h2')
     bidsTitle.textContent = 'Bids:'
-    bidsTitle.classList.add('p-h2')
+    bidsTitle.classList.add('font-h2')
     bidsContainer.appendChild(bidsTitle)
 
     if (postData.bids && postData.bids.length > 0) {
