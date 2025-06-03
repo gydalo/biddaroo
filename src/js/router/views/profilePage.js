@@ -10,7 +10,8 @@ export const profilePage = async () => {
         try {
             const storedProfile = load('profile')
 
-            const profileName = storedProfile?.data?.name
+         const profileName = load('name') || storedProfile?.data?.name;
+
 
             if (!profileName) {
                 console.error('Profile name is missing')

@@ -24,7 +24,7 @@ export function headers() {
     return {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-        'X-Noroff-API-Key': '72735a77-9e47-4c8a-889b-3ae8bdfd8904',
+        'X-Noroff-API-Key': 'a36f85a1-c383-4052-9c00-91d69a08dd17',
     }
 }
 
