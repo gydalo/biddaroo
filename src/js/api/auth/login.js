@@ -21,9 +21,11 @@ export async function login(profile) {
         }
 
         const jsonResponse = await response.json()
+        console.log('Login response:', jsonResponse)
         const { accessToken, ...user } = jsonResponse.data
 
         storage.save('token', accessToken)
+        storage.save('name', user.name)
 
         try {
             const profile = await getProfile(user.name)
