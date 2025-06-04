@@ -1,32 +1,49 @@
 import { API_AUCTION_PROFILES } from '../constants.js'
 import { authFetch, save } from '../auth/key.js'
 
+/**
+ * Updates the profile using authenticated fetch.
+ * @param {Object} profileData - The updated profile data.
+ * @returns {Object} An object with `success` and `data` or `message`.
+ */
 export async function updateProfile(profileData) {
     if (!profileData.name) {
-        throw new Error('Update requires a profile name')
+        return {
+            success: false,
+            message: 'Update requires a profile name.',
+        }
     }
 
     const updateProfileURL = `${API_AUCTION_PROFILES}/${profileData.name}`
 
-    console.log('Sending PUT request to:', updateProfileURL)
-    console.log('Payload:', profileData)
+    try {
+        const response = await authFetch(updateProfileURL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profileData),
+        })
 
-    const response = await authFetch(updateProfileURL, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(profileData),
-    })
+        const result = await response.json()
 
-    const responseData = await response.json()
-    console.log('Response from server:', responseData)
-
-    if (response.ok) {
-        save('profile', responseData)
-    } else {
-        alert('Failed to update the profile')
+        if (response.ok) {
+            save('profile', result)
+            return {
+                success: true,
+                data: result,
+            }
+        } else {
+            return {
+                success: false,
+                message:
+                    result?.errors?.[0]?.message || 'Failed to update profile.',
+            }
+        }
+    } catch {
+        return {
+            success: false,
+            message: 'Something went wrong while updating profile.',
+        }
     }
-
-    return responseData
 }

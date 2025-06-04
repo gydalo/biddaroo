@@ -4,41 +4,51 @@ import { getProfile } from '../profile/read.js'
 
 const method = 'POST'
 
+/**
+ * Logs in the user and saves tokens/profile to storage.
+ * @param {Object} profile - The login credentials { email, password }
+ * @returns {Promise<boolean>} true on success, false on failure
+ */
 export async function login(profile) {
-    const loginURL = API_AUTH_LOGIN
-    const body = JSON.stringify(profile)
-    try {
-        const response = await fetch(loginURL, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method,
-            body,
-        })
+  const loginURL = API_AUTH_LOGIN;
+  const body = JSON.stringify(profile);
+  const errorMessageEl = document.getElementById('errorMessage');
 
-        if (!response.ok) {
-            throw new Error('Username or password is incorrect')
-        }
+  errorMessageEl.textContent = '';
 
-        const jsonResponse = await response.json()
-        console.log('Login response:', jsonResponse)
-        const { accessToken, ...user } = jsonResponse.data
+  try {
+    const response = await fetch(loginURL, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    });
 
-        storage.save('token', accessToken)
-        storage.save('name', user.name)
-
-        try {
-            const profile = await getProfile(user.name)
-            storage.save('profile', profile)
-            console.log('Fetched and Saved Profile Data:', profile)
-        } catch (error) {
-            console.error('Failed to fetch full profile:', error)
-        }
-
-        /* storage.save("profile", user); */
-
-        location.reload()
-    } catch (error) {
-        alert('Wrong username or password')
+    if (!response.ok) {
+      errorMessageEl.textContent = 'Username or password is incorrect';
+      return false;
     }
+
+    const jsonResponse = await response.json();
+    const { accessToken, ...user } = jsonResponse.data;
+
+    storage.save('token', accessToken);
+    storage.save('name', user.name);
+
+    try {
+      const profileData = await getProfile(user.name);
+      if (profileData) {
+        storage.save('profile', profileData);
+      }
+    } catch {
+      // skip storing profile if it fails
+    }
+
+    location.reload();
+    return true;
+  } catch {
+    errorMessageEl.textContent = 'Wrong username or password';
+    return false;
+  }
 }

@@ -1,24 +1,41 @@
 import { API_AUTH_REGISTER } from '../constants.js'
 
-const method = 'post'
+const method = 'POST'
 
+/**
+ * Registers a new user with the given profile data.
+ * @param {Object} profile - The user's registration info.
+ * @returns {Promise<void>}
+ */
 export async function register(profile) {
-    const registerURL = API_AUTH_REGISTER
-    const body = JSON.stringify(profile)
+  const registerURL = API_AUTH_REGISTER;
+  const body = JSON.stringify(profile);
+  const errorMessageEl = document.getElementById('errorMessage');
+  const successMessageEl = document.getElementById('registerMessage');
 
+  errorMessageEl.textContent = '';
+  successMessageEl.textContent = '';
+
+  try {
     const response = await fetch(registerURL, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method,
-        body,
-    })
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    });
 
-    const result = await response.json()
+    const result = await response.json();
+
     if (!response.ok) {
-        alert('An account with this username or email already exists.')
-    } else {
-      alert('You are now registered.')
+      errorMessageEl.textContent =
+        result?.errors?.[0]?.message || 'Registration failed.';
+      return;
     }
-    console.log(result)
+
+    successMessageEl.textContent = 'You are now registered.';
+  } catch {
+    errorMessageEl.textContent =
+      'Something went wrong. Please try again later.';
+  }
 }

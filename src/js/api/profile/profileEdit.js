@@ -7,19 +7,27 @@ const form = document.querySelector('#editProfile')
 
 if (form) {
     const profileData = load('profile')
-
     const profileName = profileData?.data?.name || profileData?.name || null
+
+    const messageEl = document.createElement('div')
+    messageEl.id = 'profileMessage'
+    messageEl.className = 'text-center mt-2 font-p'
+    form.appendChild(messageEl)
+
+    function showMessage(text, isSuccess = true) {
+        messageEl.textContent = text
+        messageEl.className = isSuccess
+            ? 'text-green-500 text-center mt-2 font-p'
+            : 'text-red-500 text-center mt-2 font-p'
+    }
 
     async function loadProfileData() {
         try {
-            console.log('Fetching profile data for:', profileName)
             const profile = await getProfile(profileName)
-            console.log('Fetched profile data:', profile)
-
             const profileDetails = profile?.data
 
             if (!profileDetails || !profileDetails.name) {
-                console.error('Profile data is missing or invalid.')
+                showMessage('Invalid or missing profile data.', false)
                 return
             }
 
@@ -33,8 +41,8 @@ if (form) {
                 form.bannerURL.value =
                     profileDetails.banner?.url ||
                     'https://images.unsplash.com/photo-1579547945413-497e1b99dac0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&h=500&w=1500'
-        } catch (error) {
-            console.error('Failed to fetch profile data:', error)
+        } catch {
+            showMessage('Failed to load profile. Please try again.', false)
         }
     }
 
@@ -64,12 +72,16 @@ if (form) {
             const response = await updateProfile(updatedProfile)
 
             if (response) {
-                console.log('Profile updated successfully:', response)
                 save('profile', response)
-                window.location.href = '/biddaroo/profile/index.html'
+                showMessage('Profile updated successfully!', true)
+                setTimeout(() => {
+                    window.location.href = '/biddaroo/profile/index.html'
+                }, 1500)
+            } else {
+                showMessage('Failed to update profile.', false)
             }
-        } catch (error) {
-            console.error('Error updating profile:', error)
+        } catch {
+            showMessage('Something went wrong. Please try again later.', false)
         }
     })
 } else {
@@ -78,18 +90,12 @@ if (form) {
 
 async function displayActiveAuctions() {
     const postContainer = document.getElementById('auctionContainer')
-    if (!postContainer) {
-        console.error(`Container with id "auctionContainer" not found.`)
-        return
-    }
+    if (!postContainer) return
 
     try {
         const posts = await getPosts(1, 10)
 
-        if (!posts || !posts.data) {
-            console.error('Unexpected posts structure:', posts)
-            return
-        }
+        if (!posts?.data) return
 
         const activePostsWithImages = posts.data.filter((post) => {
             const endsAtDate = new Date(post.endsAt)
@@ -101,7 +107,6 @@ async function displayActiveAuctions() {
         })
 
         if (activePostsWithImages.length < 2) {
-            console.log('Not enough posts with images found.')
             postContainer.classList.add('font-p')
             postContainer.innerHTML = '<p>No active auctions available.</p>'
             return
@@ -114,12 +119,10 @@ async function displayActiveAuctions() {
             const title = document.createElement('h2')
             title.textContent = post.title
             title.classList.add('font-h2', 'cursor-pointer', 'mb-4')
-            postElement.appendChild(title)
             title.addEventListener('click', () => {
-                const targetUrl = `/biddaroo/post/index.html?id=${post.id}`
-                window.location.href = targetUrl
+                window.location.href = `/biddaroo/post/index.html?id=${post.id}`
             })
-            title.classList.add('font-h2')
+            postElement.appendChild(title)
 
             const img = document.createElement('img')
             img.src = post.media[0].url
@@ -129,16 +132,15 @@ async function displayActiveAuctions() {
                 'hover:cursor-pointer',
                 'hover:opacity-60'
             )
-            postElement.appendChild(img)
             img.addEventListener('click', () => {
-                const targetUrl = `/biddaroo/post/index.html?id=${post.id}`
-                window.location.href = targetUrl
+                window.location.href = `/biddaroo/post/index.html?id=${post.id}`
             })
+            postElement.appendChild(img)
 
             postContainer.appendChild(postElement)
         })
-    } catch (error) {
-        console.error('Error fetching or displaying posts:', error)
+    } catch {
+        // Silent fail
     }
 }
 
